@@ -1,0 +1,28 @@
+
+.add-image {
+  height: 50px;
+}
+
+.boxcenter {
+  display: flex;
+  justify-content: center;
+  align-items: Center;
+  vertical-align: middle;
+
+}
+
+.divForm {
+  height: 1.5rem;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+}
+
+
+.navbarBlue {
+  background-color: #4588f1;
+}
+
+.headerWhite {
+  color: #FFFFFF;
+}
