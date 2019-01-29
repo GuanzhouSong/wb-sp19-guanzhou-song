@@ -5,7 +5,7 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 
 const CourseCard = ({course, selectCourse}) => {
   return (
-      <div className="card" styles={{width: '18rem'}}>
+      <div className="card" styles="width: '280rem'">
         <img className="card-img-top"
              src="https://picsum.photos/300/200"/>
         <div className="card-body">
