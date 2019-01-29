@@ -10,7 +10,7 @@ const CourseRow = ({course}) => {
           <i class="fa fa-book"></i>
         </td>
         <td>
-          <Link to={`/course/${course.id}`}>
+          <Link to={`/course/edit/${course.id}`}>
             {course.title}
           </Link>
         </td>
