@@ -12,31 +12,21 @@ export default class CourseTable extends React.Component {
   render() {
     return (
         <div className="container-fluid ">
-          <nav className="navbar navbar-default navbarBlue navbar-fixed-top">
-            <div className="container-fluid">
-              <div className="collapse navbar-collapse"
-                   id="example-navbar-collapse">
-                <ul className="nav navbar-nav">
-                  <li className="active"><a href="#">iOS</a></li>
-                </ul>
-              </div>
-              <div className="navbar-header headerWhite d-none d-sm-block">
-                Course Manager
-              </div>
-              <div>
-                <form className=" navbar-form divForm">
-                  <div className="form-group col-10">
-                    <input className="form-control "
-                           placeholder="New Course Title" type="text"/>
-                  </div>
-                </form>
-              </div>
-              <div>
-                <a class="btn  btn-danger" href="#">
-                  <i class="fa fa-plus-circle"> New</i>
+          <nav
+              className="navbar navbar-expand navbar-dark bg-primary static-top">
+
+            <a className="navbar-brand pb-0 pt-0 d-none d-sm-inline" href="#">
+              <i className="fa fa-bars pr-3"></i> Course Manager
+            </a>
+            <form className="form-inline w-100">
+              <input className="form-control col-10" type="search"
+                     placeholder="New Course Title"/>
+              <div className="col-2">
+                <a className="btn btn-danger" href="#">
+                  <i className="fa fa-plus"></i>
                 </a>
               </div>
-            </div>
+            </form>
           </nav>
 
           <table className="table">

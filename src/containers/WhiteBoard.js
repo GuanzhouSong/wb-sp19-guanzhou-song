@@ -1,14 +1,18 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import * as courses from '../services/Data/courses2.json';
 import CourseTable from '../containers/CourseTable';
 import CourseGrid from '../containers/CourseGrid';
+import CourseEditor from "../components/CourseEditor";
+import "../../node_modules/bootstrap/dist/js/bootstrap";
+import CourseService from "../services/CourseService";
 
 export default class WhiteBoard extends React.Component {
   constructor(props) {
     super(props);
+    this.courseService = new CourseService();
+    this.courses = this.courseService.findAllCourses();
     this.state = {
-      selectedCourse: courses.courseData[0]
+      selectedCourse: this.courses[0]
     }
   };
 
@@ -21,10 +25,12 @@ export default class WhiteBoard extends React.Component {
           <div>
             <Route path="/course/table"
                    render={() => <CourseTable selectCourse={this.selectCourse}
-                                              courses={courses.courseData}/>}/>
+                                              courses={this.courses}/>}/>
             <Route path="/course/grid"
                    render={() => <CourseGrid selectCourse={this.selectCourse}
-                                             courses={courses.courseData}/>}/>
+                                             courses={this.courses}/>}/>
+            <Route path='/course/edit/:id'
+                   component={CourseEditor}/>
           </div>
         </Router>
 
