@@ -41,7 +41,7 @@ export default class CourseTable extends React.Component {
                 <div className="d-none d-sm-block">last Modified</div>
               </th>
               <th>
-                <a className="no-text-decoration d-inline" href="/course/Grid">
+                <a className="no-text-decoration d-inline" href="/">
                   <i
                       className="fa fa-th pr-4"></i>
                 </a> <a className="no-decorate d-inline" href="#"> <i

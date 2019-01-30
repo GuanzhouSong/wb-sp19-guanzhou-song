@@ -1,42 +1,50 @@
-import React from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
-import CourseTable from '../containers/CourseTable';
-import CourseGrid from '../containers/CourseGrid';
+import React, {Component} from 'react'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
+import CourseGrid from './CourseGrid'
+import CourseTable from './CourseTable'
+import CourseService from '../services/CourseService'
 import CourseEditor from "../components/CourseEditor";
-import "../../node_modules/bootstrap/dist/js/bootstrap";
-import CourseService from "../services/CourseService";
 
-export default class WhiteBoard extends React.Component {
-  constructor(props) {
-    super(props);
+class WhiteBoard extends Component {
+  constructor() {
+    super();
     this.courseService = new CourseService();
-    this.courses = this.courseService.findAllCourses();
     this.state = {
-      selectedCourse: this.courses[0]
+      courses: this.courseService.findAllCourses()
     }
-  };
+  }
 
-  selectCourse = course =>
-      this.setState({selectedCourse: course});
+  deleteCourse = course =>
+      this.setState({
+        courses: this.courseService.deleteCourse(course)
+      });
+  addCourse = () =>
+      this.setState({
+        courses: this.courseService.addCourse(null)
+      });
 
   render() {
     return (
-        <Router>
-          <div>
-            <Route path="/course/table"
-                   render={() => <CourseTable selectCourse={this.selectCourse}
-                                              courses={this.courses}/>}/>
-            <Route path="/course/grid"
-                   render={() => <CourseGrid selectCourse={this.selectCourse}
-                                             courses={this.courses}/>}/>
-            <Route path='/course/edit/:id'
-                   component={CourseEditor}/>
-          </div>
-        </Router>
-
+        <div>
+          <Router>
+            <div>
+              <Route path='/' exact
+                     render={() =>
+                         <CourseGrid
+                             addCourse={this.addCourse}
+                             deleteCourse={this.deleteCourse}
+                             courses={this.state.courses}/>}/>
+              <Route path="/course/edit/:id"
+                     exact
+                     component={CourseEditor}/>
+              <Route path='/table'
+                     render={() => <CourseTable
+                         courses={this.state.courses}/>}/>
+            </div>
+          </Router>
+        </div>
     )
   }
 }
 
-
-
+export default WhiteBoard;

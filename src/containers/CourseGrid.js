@@ -1,7 +1,6 @@
 import React from 'react';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
-import '../containers/CourseTable.css';
 import CourseCard from '../components/CourseCard'
 
 export default class CourseGrid extends React.Component {
@@ -39,7 +38,7 @@ export default class CourseGrid extends React.Component {
               <th>
               </th>
               <th>
-                <a className="no-text-decoration d-inline" href="/course/Table">
+                <a className="no-text-decoration d-inline" href="/table">
                   <i
                       className="fa fa-reorder pr-4"></i>
                 </a> <a className="no-decorate d-inline" href="#"> <i
@@ -50,8 +49,7 @@ export default class CourseGrid extends React.Component {
           </table>
           <div className="card-deck">
             {this.props.courses.map((course, key) =>
-                <CourseCard course={course}
-                            key={key}/>)}
+                <CourseCard course={course} key={key}/>)}
           </div>
         </div>
     )

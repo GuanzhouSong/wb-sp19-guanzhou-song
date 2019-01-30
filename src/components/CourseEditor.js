@@ -4,6 +4,7 @@ import LessonTabs from "./LessonTabs";
 import TopicPills from "./TopicPills";
 import WidgetList from "./WidgetList";
 import CourseService from "../services/CourseService"
+import "../../node_modules/bootstrap/dist/js/bootstrap.min"
 
 class CourseEditor extends React.Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class CourseEditor extends React.Component {
     const course = this.courseService.findCourseById(courseId);
     this.state = {
       course: course,
-      module: course.modules[0]
+      module: course.modules[0],
+      lesson: ""
     }
   }
 
@@ -21,6 +23,18 @@ class CourseEditor extends React.Component {
       this.setState({
         module: module
       });
+
+  lessonChanged = (event) => {
+    this.setState(
+        {
+          lesson: {title: event.target.key}
+        });
+    alert("hhh");
+  };
+
+  changeTopics = () => {
+
+  };
 
   render() {
     return (
@@ -34,8 +48,9 @@ class CourseEditor extends React.Component {
             </div>
             <div className="col-8">
               <LessonTabs
-                  lessons={this.state.module.lessons}/>
-              <TopicPills/>
+                  lessons={this.state.module.lessons}
+              />
+              <TopicPills key={this.state.lesson}/>
               <WidgetList/>
 
             </div>
