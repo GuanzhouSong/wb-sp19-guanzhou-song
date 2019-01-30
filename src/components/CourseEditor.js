@@ -15,13 +15,18 @@ class CourseEditor extends React.Component {
     this.state = {
       course: course,
       module: course.modules[0],
-      lesson: ""
+      lesson: course.modules[0].lessons[0]
     }
   }
 
   selectModule = module =>
       this.setState({
         module: module
+      });
+
+  selectLesson = lesson =>
+      this.setState({
+        lesson: lesson
       });
 
   lessonChanged = (event) => {
@@ -49,8 +54,9 @@ class CourseEditor extends React.Component {
             <div className="col-8">
               <LessonTabs
                   lessons={this.state.module.lessons}
+                  onClick={this.selectLesson}
               />
-              <TopicPills key={this.state.lesson}/>
+              <TopicPills lesson={this.state.lesson.topics}/>
               <WidgetList/>
 
             </div>

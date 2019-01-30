@@ -12,8 +12,7 @@ class ModuleList extends React.Component {
       module: {
         title: 'New Module',
         id: this.props.length
-      },
-      index: this.props.modules.length + 1
+      }
     };
     this.deleteModule = this.deleteModule.bind(this);
     // this.titleChanged = this.titleChanged.bind(this);
@@ -25,24 +24,24 @@ class ModuleList extends React.Component {
           modules: [
             ...this.state.modules,
             this.state.module
-          ],
-          index: this.state.index++
+          ]
         }
     )
   };
 
   deleteModule = (e) => {
-
     var lists = this.state.modules;
-
     var id = e.target.getAttribute("id");
-
     var index = lists.findIndex(function (module) {
       return module.id == id
     });
     lists.splice(index, 1);
+    this.setState({modules: lists})
 
-    this.setState({modules: lists, index: this.state.index--})
+  };
+
+  changeModuleTitle = (e) => {
+
 
   };
 
@@ -51,7 +50,8 @@ class ModuleList extends React.Component {
         {
           module: {
             title: event.target.value,
-            id: (new Date()).getTime()
+            id: (new Date()).getTime(),
+            lesson: "",
           }
         });
   };
