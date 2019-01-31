@@ -13,7 +13,7 @@ class ModuleListItem extends React.Component {
             <i className="fa fa-trash-o pr-4 pull-right" id={this.props.id}
                onClick={this.props.deleteModule}/>
             <i className="fa fa-edit pr-4 pull-right"
-            />
+               id={this.props.id}/>
           </a>
         </li>
 
