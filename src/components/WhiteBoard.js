@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom'
 import CourseGrid from './CourseGrid'
 import CourseTable from './CourseTable'
 import CourseService from '../services/CourseService'
-import CourseEditor from "../components/CourseEditor";
+import CourseEditor from "./CourseEditor";
 
 class WhiteBoard extends Component {
   constructor() {

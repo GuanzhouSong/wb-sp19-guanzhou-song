@@ -10,7 +10,10 @@ const CourseCard = ({course, selectCourse}) => {
           <img className="card-img-top"
                src="https://picsum.photos/300/200"/>
           <div className="card-body">
-            <h5 className="card-title">{course.title}</h5>
+            <Link onClick={() => selectCourse()}
+                  to={`/course/edit/${course.id}`}>
+              <h5 className="card-title">{course.title}</h5>
+            </Link>
             <p className="card-text">{course.title}</p>
             <Link className="btn btn-primary" onClick={() => selectCourse()}
                   to={`/course/edit/${course.id}`}>More...</Link>
