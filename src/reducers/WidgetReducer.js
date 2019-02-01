@@ -39,6 +39,18 @@ const widgetReducer = (state = widgets, action) => {
             widget.id === action.widget.id ? action.widget : widget
         )
       };
+    case 'FIND_WIDGET':
+      return {
+        widgets: state.widgets.find(widget => widget.id === action.widget.id)
+      };
+    case 'FIND_ALL_WIDGETS_FOR_TOPIC':
+      return {
+        widgets: state.widget
+      };
+    case 'FIND_ALL_WIDGETS':
+      return {
+        widgets: state.widget
+      };
     default:
       return state;
   }
