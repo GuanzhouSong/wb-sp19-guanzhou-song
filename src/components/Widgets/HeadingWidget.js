@@ -2,7 +2,6 @@ import React from 'react'
 
 const HeadingWidget = ({widget, updateWidget}) =>
     <div>
-      <h2>Heading Widget</h2>
       <select
           onChange={event => {
             widget.size = parseInt(event.target.value);

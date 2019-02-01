@@ -6,7 +6,11 @@ const WidgetComponent = ({widget, deleteWidget, updateWidget}) =>
     <div className="container widget">
       <div className="row mb-3">
         <div className="col-7">
-          <h2>Heading Widget</h2>
+          {
+            widget.type == 'HEADING' &&
+            <h2>Heading Widget</h2> ||
+            widget.type == 'IMAGE' && <h2>Image Widget</h2>
+          }
         </div>
         <div className="col-5">
           <button className="btn btn-warning">
