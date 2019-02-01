@@ -21,6 +21,20 @@ const dispatchToPropertyMapper = dispatch => ({
         type: 'UPDATE_WIDGET',
         widget: widget
       }),
+  findWidget: widget =>
+      dispatch({
+            type: 'FIND_WIDGET',
+            widget: widget
+          }
+      ),
+  findAllWidgetsForTopic: () =>
+      dispatch({
+        type: 'FIND_ALL_WIDGETS_FOR_TOPIC'
+      }),
+  findAllWidgets: () =>
+      dispatch({
+        type: 'FIND_ALL_WIDGETS'
+      })
 });
 
 const WidgetListContainer = connect(
