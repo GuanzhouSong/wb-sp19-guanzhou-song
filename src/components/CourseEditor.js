@@ -2,9 +2,14 @@ import React from 'react'
 import ModuleList from "./ModuleList";
 import LessonTabs from "./LessonTabs";
 import TopicPills from "./TopicPills";
-import WidgetList from "./WidgetList";
-import CourseService from "../services/CourseService"
+import CourseService from "../services/CourseService";
+import WidgetListContainer from '../containers/WidgetListContainer'
+import widgetReducer from '../reducers/WidgetReducer'
 import "../../node_modules/bootstrap/dist/js/bootstrap.min"
+import {createStore} from 'redux'
+import {Provider} from 'react-redux'
+
+const store = createStore(widgetReducer);
 
 class CourseEditor extends React.Component {
   constructor(props) {
@@ -57,7 +62,9 @@ class CourseEditor extends React.Component {
                   onClick={this.selectLesson}
               />
               <TopicPills lesson={this.state.lesson.topics}/>
-              <WidgetList/>
+              <Provider store={store}>
+                <WidgetListContainer/>
+              </Provider>
 
             </div>
           </div>
