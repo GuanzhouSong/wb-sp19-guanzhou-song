@@ -1,6 +1,9 @@
 import React from 'react'
 import HeadingWidget from './Widgets/HeadingWidget'
 import ImageWidget from './Widgets/ImageWidget'
+import ListWidget from './Widgets/ListWidget'
+import LinkWidget from './Widgets/LinkWidget'
+import ParagraphWidget from "./Widgets/ParagraphWidget";
 
 const WidgetComponent = ({isTail, widget, deleteWidget, updateWidget, widgetMovingUp, widgetMovingDown, preview}) =>
     <div className="container widget">
@@ -10,6 +13,12 @@ const WidgetComponent = ({isTail, widget, deleteWidget, updateWidget, widgetMovi
             widget.type == 'HEADING' &&
             <h2>Heading Widget</h2> ||
             widget.type == 'IMAGE' && <h2>Image Widget</h2>
+            ||
+            widget.type == 'LINK' && <h2>Link Widget</h2>
+            ||
+            widget.type == 'LIST' && <h2>List Widget</h2>
+            ||
+            widget.type == 'PARAGRAPH' && <h2>Paragraph Widget</h2>
           }
         </div>
         <div className="col-5">
@@ -52,10 +61,27 @@ const WidgetComponent = ({isTail, widget, deleteWidget, updateWidget, widgetMovi
         <HeadingWidget
             updateWidget={updateWidget}
             widget={widget}
-            preview={preview}/> ||
-        widget.type == 'IMAGE' && <ImageWidget updateWidget={updateWidget}
-                                               widget={widget}
-                                               preview={preview}/>
+            preview={preview}/>
+        || widget.type == 'IMAGE' &&
+        <ImageWidget
+            updateWidget={updateWidget}
+            widget={widget}
+            preview={preview}/>
+        || widget.type == 'LIST' &&
+        <ListWidget
+            updateWidget={updateWidget}
+            widget={widget}
+            preview={preview}/>
+        || widget.type == 'LINK' &&
+        <LinkWidget
+            updateWidget={updateWidget}
+            widget={widget}
+            preview={preview}/>
+        || widget.type == 'PARAGRAPH' &&
+        <ParagraphWidget
+            updateWidget={updateWidget}
+            widget={widget}
+            preview={preview}/>
       }
     </div>;
 

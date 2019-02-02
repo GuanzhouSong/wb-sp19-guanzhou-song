@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ParagraphWidget = ({widget, updateWidget, preview}) =>
+const ListWidget = ({widget, updateWidget, preview}) =>
     <div>
       <textarea className="form-control" placeholder="Paragraph content"
                 type="text" value={widget.text}
@@ -8,7 +8,15 @@ const ParagraphWidget = ({widget, updateWidget, preview}) =>
                   widget.text = event.target.value;
                   updateWidget(widget)
                 }}/>
-
+      <select
+          onChange={event => {
+            widget.size = parseInt(event.target.value);
+            updateWidget(widget)
+          }}
+          className="form-control">
+        <option value="1">Unordered List</option>
+        <option value="2">Ordered List</option>
+      </select>
       <input
           value={widget.name}
           onChange={event => {
@@ -20,9 +28,10 @@ const ParagraphWidget = ({widget, updateWidget, preview}) =>
         <h3>Preview</h3>
         <div
             className="list-group row justify-content-start col-12 widget-inner">
-          {widget.text}
+          {widget.text.split('\n').map(text =>
+              <li>{text}</li>)}
         </div>
       </div>
     </div>;
 
-export default ParagraphWidget
+export default ListWidget

@@ -26,6 +26,29 @@ const widgetsJson =
           text: 'This is a heading',
           size: 2,
           order: 2
+        }, {
+          id: 854,
+          title: 'Widget 4',
+          type: 'LIST',
+          name: 'List 1',
+          text: 'This is a list',
+          ordered: 1,
+          order: 3
+        }, {
+          id: 8543,
+          title: 'Widget 5',
+          type: 'LINK',
+          name: 'Link 5',
+          text: 'This is a link',
+          order: 4,
+          url: 'https://www.baidu.com'
+        }, {
+          id: 85434,
+          title: 'Widget 6',
+          type: 'PARAGRAPH',
+          name: 'Paragraph 5',
+          text: 'This is a paragraph',
+          order: 5
         },
       ]
     };
