@@ -2,19 +2,20 @@ import React from 'react'
 import WidgetComponent from './WidgetComponent'
 
 const WidgetList = ({
-  widgets, addWidget, deleteWidget, updateWidget,
-  findWidget, findAllWidgetsForTopic, findAllWidgets, saveWidgets, widgetMovingUp, widgetMovingDown
+  widgets, addWidget, deleteWidget, updateWidget, togglePreview,
+  findWidget, findAllWidgetsForTopic, findAllWidgets, saveWidgets, widgetMovingUp, widgetMovingDown, preview
 }) =>
     <div>
       <div className="container">
         <div className="row mb-3">
-          <h1>Widget List {widgets.length}</h1>
+          <h1>Widget List</h1>
           <div className="offset-9">
 
             <button className="btn btn-success mr-2">Save</button>
             <span className="mr-2">Preview</span>
-            <a>
-              <i className="fa fa-2x fa-toggle-off"/>
+            <a onClick={togglePreview}>
+              {preview ? <i className="fa fa-2x fa-toggle-on"/> : <i
+                  className="fa fa-2x fa-toggle-off"/>}
             </a>
           </div>
         </div>
@@ -30,7 +31,8 @@ const WidgetList = ({
                   widgetMovingUp={widgetMovingUp}
                   widgetMovingDown={widgetMovingDown}
                   isTail={(widgets.length - 1) === widget.order}
-                  widget={widget}/>
+                  widget={widget}
+                  preview={preview}/>
           )
         }
         <button

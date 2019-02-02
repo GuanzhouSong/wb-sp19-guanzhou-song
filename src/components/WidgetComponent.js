@@ -2,7 +2,7 @@ import React from 'react'
 import HeadingWidget from './Widgets/HeadingWidget'
 import ImageWidget from './Widgets/ImageWidget'
 
-const WidgetComponent = ({isTail, widget, deleteWidget, updateWidget, widgetMovingUp, widgetMovingDown}) =>
+const WidgetComponent = ({isTail, widget, deleteWidget, updateWidget, widgetMovingUp, widgetMovingDown, preview}) =>
     <div className="container widget">
       <div className="row mb-3">
         <div className="col-7">
@@ -51,8 +51,11 @@ const WidgetComponent = ({isTail, widget, deleteWidget, updateWidget, widgetMovi
         widget.type == 'HEADING' &&
         <HeadingWidget
             updateWidget={updateWidget}
-            widget={widget}/> ||
-        widget.type == 'IMAGE' && <ImageWidget widget={widget}/>
+            widget={widget}
+            preview={preview}/> ||
+        widget.type == 'IMAGE' && <ImageWidget updateWidget={updateWidget}
+                                               widget={widget}
+                                               preview={preview}/>
       }
     </div>;
 

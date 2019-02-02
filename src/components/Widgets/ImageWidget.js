@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ImageWidget = ({widget, updateWidget}) =>
+const ImageWidget = ({widget, updateWidget, preview}) =>
     <div>
       <input
           value={widget.link}
@@ -10,14 +10,16 @@ const ImageWidget = ({widget, updateWidget}) =>
           }}
           className="form-control"/>
       <input
-          value={widget.text}
+          value={widget.name}
           onChange={event => {
-            widget.text = event.target.value;
+            widget.name = event.target.value;
             updateWidget(widget)
           }}
           className="form-control"/>
-      <h3>Preview</h3>
-      <img src={widget.link} width="500px"/>
+      <div hidden={!preview}>
+        <h3>Preview</h3>
+        <img src={widget.link} width="500px"/>
+      </div>
     </div>;
 
 export default ImageWidget

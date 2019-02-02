@@ -3,7 +3,8 @@ import {connect} from 'react-redux'
 import WidgetList from '../components/WidgetList'
 
 const stateToPropertyMapper = state => ({
-  widgets: state.widgets
+  widgets: state.widgets,
+  preview: state.preview
 });
 
 const dispatchToPropertyMapper = dispatch => ({
@@ -48,6 +49,10 @@ const dispatchToPropertyMapper = dispatch => ({
       dispatch({
         type: 'WIDGET_MOVE_DOWN',
         widget: widget
+      }),
+  togglePreview: () =>
+      dispatch({
+        type: 'TOGGLE_PREVIEW',
       })
 
 });
