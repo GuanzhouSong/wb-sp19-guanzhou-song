@@ -2,7 +2,7 @@ import React from 'react'
 import HeadingWidget from './Widgets/HeadingWidget'
 import ImageWidget from './Widgets/ImageWidget'
 
-const WidgetComponent = ({widget, deleteWidget, updateWidget}) =>
+const WidgetComponent = ({isTail, widget, deleteWidget, updateWidget, widgetMovingUp, widgetMovingDown}) =>
     <div className="container widget">
       <div className="row mb-3">
         <div className="col-7">
@@ -13,12 +13,24 @@ const WidgetComponent = ({widget, deleteWidget, updateWidget}) =>
           }
         </div>
         <div className="col-5">
-          <button className="btn btn-warning">
-            <i className="fa fa-arrow-up"></i>
-          </button>
-          <button className="btn btn-warning">
-            <i className="fa fa-arrow-down "></i>
-          </button>
+          {
+            widget.order !== 0 && <button className="btn btn-warning"
+                                          onClick={(event) => {
+                                            widgetMovingUp(widget);
+                                            updateWidget(widget)
+                                          }}>
+              <i className="fa fa-arrow-up"></i>
+            </button>
+          }
+          {
+            !isTail && <button className="btn btn-warning"
+                               onClick={(event) => {
+                                 widgetMovingDown(widget);
+                                 updateWidget(widget)
+                               }}>
+              <i className="fa fa-arrow-down"></i>
+            </button>
+          }
           <select onChange={(event) => {
             widget.type = event.target.value;
             updateWidget(widget)

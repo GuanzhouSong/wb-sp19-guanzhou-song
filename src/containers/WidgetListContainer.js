@@ -34,7 +34,22 @@ const dispatchToPropertyMapper = dispatch => ({
   findAllWidgets: () =>
       dispatch({
         type: 'FIND_ALL_WIDGETS'
+      }),
+  saveWidgets: () =>
+      dispatch({
+        type: 'SAVE_WIDGETS'
+      }),
+  widgetMovingUp: widget =>
+      dispatch({
+        type: 'WIDGET_MOVE_UP',
+        widget: widget
+      }),
+  widgetMovingDown: widget =>
+      dispatch({
+        type: 'WIDGET_MOVE_DOWN',
+        widget: widget
       })
+
 });
 
 const WidgetListContainer = connect(
