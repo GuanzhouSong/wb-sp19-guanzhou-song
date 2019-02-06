@@ -4,6 +4,7 @@ import ImageWidget from './Widgets/ImageWidget'
 import ListWidget from './Widgets/ListWidget'
 import LinkWidget from './Widgets/LinkWidget'
 import ParagraphWidget from "./Widgets/ParagraphWidget";
+import "./WidgetList.css";
 
 const WidgetComponent = ({isTail, widget, deleteWidget, updateWidget, widgetMovingUp, widgetMovingDown, preview}) =>
     <div className="container widget">
@@ -84,5 +85,4 @@ const WidgetComponent = ({isTail, widget, deleteWidget, updateWidget, widgetMovi
             preview={preview}/>
       }
     </div>;
-
 export default WidgetComponent
