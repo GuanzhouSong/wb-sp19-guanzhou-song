@@ -183,14 +183,12 @@ class CourseService {
   }
 
   findCourseById(courseId) {
-    alert(courseId);
     return courses.filter(course => course.id == courseId)[0];
   }
 
   updateCourse(courseId, course) {
-
     courses = courses.map(s => {
-      if (s.id == courseId) {
+      if (s.id === courseId) {
         return course
       } else {
         return s;

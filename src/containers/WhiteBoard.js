@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
-import CourseGrid from './CourseGrid'
-import CourseTable from './CourseTable'
+import CourseGrid from '../components/CourseGrid'
+import CourseTable from '../components/CourseTable'
 import CourseService from '../services/CourseService'
 import CourseEditor from "./CourseEditor";
 

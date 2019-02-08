@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import WidgetList from '../components/WidgetList'
+import WidgetList from './WidgetList'
 
 const stateToPropertyMapper = state => ({
   widgets: state.widgets,

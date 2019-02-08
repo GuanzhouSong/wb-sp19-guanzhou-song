@@ -6,7 +6,7 @@ var courseService = new CourseService();
 class ModuleService {
   findAllModules(courseId) {
     let course = courseService.findCourseById(courseId);
-    return course.modules ? course.modules : [];
+    return course.modules;
   }
 
   findModuleById(courseId, moduleId) {
@@ -15,11 +15,11 @@ class ModuleService {
   }
 
   deleteModule(courseId, moduleId) {
-
     let course = {...courseService.findCourseById(courseId)};
     let newModules = course.modules.filter(m => m.id != moduleId);
     course.modules = newModules;
     courseService.updateCourse(courseId, course);
+    return newModules;
   }
 
   updateModule(courseId, module) {
@@ -33,6 +33,7 @@ class ModuleService {
     let course = {...courseService.findCourseById(courseId)};
     course.modules = modules;
     courseService.updateCourse(courseId, course);
+    return module
   }
 
   createModule(courseId, module) {
@@ -41,6 +42,7 @@ class ModuleService {
     let course = {...courseService.findCourseById(courseId)};
     course.modules = modules;
     courseService.updateCourse(courseId, course);
+    return module
   }
 }
 

@@ -1,9 +1,9 @@
 import React from 'react'
-import HeadingWidget from './Widgets/HeadingWidget'
-import ImageWidget from './Widgets/ImageWidget'
-import ListWidget from './Widgets/ListWidget'
-import LinkWidget from './Widgets/LinkWidget'
-import ParagraphWidget from "./Widgets/ParagraphWidget";
+import HeadingWidget from '../components/Widgets/HeadingWidget'
+import ImageWidget from '../components/Widgets/ImageWidget'
+import ListWidget from '../components/Widgets/ListWidget'
+import LinkWidget from '../components/Widgets/LinkWidget'
+import ParagraphWidget from "../components/Widgets/ParagraphWidget";
 import "./WidgetList.css";
 
 const WidgetComponent = ({isTail, widget, deleteWidget, updateWidget, widgetMovingUp, widgetMovingDown, preview}) =>
