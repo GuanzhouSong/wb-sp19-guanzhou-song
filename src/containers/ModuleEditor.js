@@ -20,6 +20,7 @@ export default class ModuleEditor
     this.selectModule = this.selectModule.bind(this);
     this.selectCourse = this.selectCourse.bind(this);
     this.selectLesson = this.selectLesson.bind(this);
+    this.deleteLesson = this.deleteLesson.bind(this);
   }
 
   selectModule(moduleId) {
@@ -32,7 +33,6 @@ export default class ModuleEditor
 
   selectLesson(e) {
     this.setState({lessonId: e.target.getAttribute("id")});
-    this.render();
   }
 
   componentDidMount() {
@@ -42,10 +42,18 @@ export default class ModuleEditor
   }
 
   componentWillReceiveNewProps(newProps) {
-    console.log(newProps);
     this.selectModule
     (newProps.moduleId);
     this.selectCourse(newProps.courseId);
+  }
+
+  deleteLesson(e) {
+    this.lessonService
+    .deleteLesson(this.state.courseId, this.state.moduleId,
+        e.target.getAttribute("id"));
+
+    this.lessonService
+    .findAllLessons(this.state.courseId, this.state.moduleId);
   }
 
   render() {
@@ -54,7 +62,9 @@ export default class ModuleEditor
 
           <div className="col-8">
             <LessonTabs moduleId={this.props.moduleId}
-                        courseId={this.props.courseId}/>
+                        courseId={this.props.courseId}
+                        selectLesson={this.selectLesson}
+                        deleteLesson={this.deleteLesson}/>
           </div>
           <LessonEditor moduleId={this.props.moduleId}
                         courseId={this.props.courseId}

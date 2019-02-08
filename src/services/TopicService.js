@@ -6,7 +6,7 @@ var lessonService = new LessonService();
 class TopicService {
   findAllTopics(courseId, moduleId, lessonId) {
     let lesson = lessonService.findLessonById(courseId, moduleId, lessonId);
-    return lesson.topics ? lesson.topics : [];
+    return lesson ? (lesson.topics ? lesson.topics : []) : [];
   }
 
   findTopicById(courseId, moduleId, lessonId, topicId) {

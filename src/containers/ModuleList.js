@@ -16,7 +16,6 @@ class ModuleList extends React.Component {
     this.deleteModule = this.deleteModule.bind(this);
     this.setCourseId = this.setCourseId.bind(this);
     this.setModule = this.setModule.bind(this);
-    this.moduleService = new ModuleService();
   }
 
   setModules(modules) {
@@ -60,8 +59,10 @@ class ModuleList extends React.Component {
   }
 
   deleteModule(e) {
+    var moduleId = e.target.getAttribute("id");
+    e.target.setAttribute("id", "del");
     this.moduleService
-    .deleteModule(this.props.courseId, e.target.getAttribute("id"));
+    .deleteModule(this.state.courseId, moduleId);
     this.findAllModulesForCourse(this.props.courseId)
   }
 

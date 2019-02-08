@@ -10,6 +10,8 @@ export default class LessonTabs extends React.Component {
     this.state = {
       moduleId: this.props.moduleId,
       courseId: this.props.courseId,
+      lessonId: this.lessonService.findAllLessons(this.props.courseId,
+          this.props.moduleId)[0].id,
       lessons: this.lessonService.findAllLessons(this.props.courseId,
           this.props.moduleId),
       lesson: {
@@ -19,24 +21,9 @@ export default class LessonTabs extends React.Component {
     };
     this.createLesson = this.createLesson.bind(this);
     this.titleChanged = this.titleChanged.bind(this);
-    this.deleteLesson = this.deleteLesson.bind(this);
     this.setModuleId = this.setModuleId.bind(this);
     this.setCourseId = this.setCourseId.bind(this);
 
-  }
-
-  componentDidMount() {
-    this.selectModule
-    (this.props.moduleId);
-    this.selectCourse(this.props.courseId);
-    this.setLessons(this.lessonService.findAllLessons(this.props.courseId,
-        this.props.moduleId));
-  }
-
-  componentWillReceiveNewProps(newProps) {
-    this.selectModule
-    (newProps.props.moduleId);
-    this.selectCourse(newProps.props.courseId);
   }
 
   setLessons(lessons) {
@@ -44,7 +31,6 @@ export default class LessonTabs extends React.Component {
   }
 
   findAllLessonsForModule(moduleId) {
-    console.log(moduleId);
     var lessons = this.lessonService
     .findAllLessons(this.props.courseId, moduleId);
     this.setLessons(lessons);
@@ -67,14 +53,15 @@ export default class LessonTabs extends React.Component {
     console.log(newProps);
     this.setModuleId(newProps.moduleId);
     this.setCourseId(newProps.courseId);
-    this.findAllLessonsForModule(newProps.moduleId)
+    this.findAllLessonsForModule(this.state.moduleId);
+
   }
 
   createLesson() {
     this.lessonService
-    .createLesson(this.state.courseId, this.state.moduleId, this.state.lesson);
+    .createLesson(this.props.courseId, this.props.moduleId, this.state.lesson);
     this.lessonService
-    .findAllLessons(this.state.courseId, this.props.moduleId);
+    .findAllLessons(this.props.courseId, this.props.moduleId);
     this.setState({
       lesson: {
         title: '',
@@ -93,15 +80,6 @@ export default class LessonTabs extends React.Component {
         });
   }
 
-  deleteLesson(lessonId) {
-    console.log('delete');
-    this.lessonService
-    .deleteLesson(this.props.courseId, this.props.moduleId, lessonId);
-
-    this.lessonService
-    .findAllLessons(this.state.courseId, this.props.moduleId);
-  }
-
   renderListOfLessons() {
     let lessons = null;
 
@@ -110,9 +88,10 @@ export default class LessonTabs extends React.Component {
           (lesson) => {
             return <LessonTab courseId={this.props.courseId}
                               moduleId={this.props.moduleId}
+                              lessonId={lesson.id}
                               selectLesson={this.props.selectLesson}
                               lesson={lesson}
-                              key={lesson.id} deleteLesson={this.deleteLesson}/>
+                              deleteLesson={this.props.deleteLesson}/>
           });
     }
     return (

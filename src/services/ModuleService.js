@@ -19,7 +19,7 @@ class ModuleService {
     let newModules = course.modules.filter(m => m.id != moduleId);
     course.modules = newModules;
     courseService.updateCourse(courseId, course);
-    return newModules;
+    return course;
   }
 
   updateModule(courseId, module) {
