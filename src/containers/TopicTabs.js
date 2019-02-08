@@ -87,11 +87,11 @@ export default class TopicTabs extends React.Component {
         });
   }
 
-  deleteTopic(topicId) {
+  deleteTopic(e) {
     console.log('delete');
     this.topicService
     .deleteTopic(this.props.courseId, this.props.moduleId, this.props.lessonId,
-        topicId);
+        e.target.getAttribute("id"));
 
     this.topicService
     .findAllTopics(this.state.courseId, this.props.moduleId,
@@ -108,7 +108,9 @@ export default class TopicTabs extends React.Component {
                              moduleId={this.props.moduleId}
                              lessonId={this.props.lessonId}
                              topic={topic}
-                             key={topic.id} deleteTopic={this.deleteTopic}/>
+                             selectTopic={this.selectTopic}
+                             topicId={topic.id}
+                             deleteTopic={this.deleteTopic}/>
           });
     }
     return (
