@@ -53,7 +53,7 @@ export default class LessonTabs extends React.Component {
     console.log(newProps);
     this.setModuleId(newProps.moduleId);
     this.setCourseId(newProps.courseId);
-    this.findAllLessonsForModule(this.state.moduleId);
+    this.findAllLessonsForModule(newProps.moduleId);
 
   }
 
