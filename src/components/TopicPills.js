@@ -52,7 +52,7 @@ class TopicPills extends React.Component {
         this.state.lesson.map(topics =>
             <li className="nav-item">
               <a className="nav-link show" data-toggle="pill"
-                 href="#">{topics.title}
+                 href={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}/topic/${this.state.topic.id}`}>{topics.title}
                 <i className="fa fa-trash-o pr-4 pull-right" id={topics.id}
                    onClick={this.deleteTopic}/>
                 <i className="fa fa-edit pr-4 pull-right"/>

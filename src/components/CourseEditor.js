@@ -39,7 +39,6 @@ class CourseEditor extends React.Component {
         {
           lesson: {title: event.target.key}
         });
-    alert("hhh");
   };
 
   changeTopics = () => {
@@ -53,15 +52,21 @@ class CourseEditor extends React.Component {
           <div className="row">
             <div className="col-4">
               <ModuleList
+                  courseId={this.state.course.id}
                   selectModule={this.selectModule}
                   modules={this.state.course.modules}/>
             </div>
             <div className="col-8">
               <LessonTabs
+                  courseId={this.state.course.id}
+                  moduleId={this.state.module.id}
                   lessons={this.state.module.lessons}
                   onClick={this.selectLesson}
               />
-              <TopicPills lesson={this.state.lesson.topics}/>
+              <TopicPills courseId={this.state.course.id}
+                          moduleId={this.state.module.id}
+                          lessonId={this.state.lesson.id}
+                          lesson={this.state.lesson.topics}/>
               <Provider store={store}>
                 <WidgetListContainer/>
               </Provider>

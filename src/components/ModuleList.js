@@ -77,6 +77,7 @@ class ModuleList extends React.Component {
                     return (
                         <ModuleListItem
                             selectModule={this.props.selectModule}
+                            courseId={this.props.courseId}
                             id={module.id}
                             module={module}
                             deleteModule={this.deleteModule}/>
