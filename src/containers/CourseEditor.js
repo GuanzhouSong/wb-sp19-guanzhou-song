@@ -18,7 +18,6 @@ class CourseEditor extends React.Component {
 
   selectModule(e) {
     this.setState({moduleId: e.target.getAttribute("id")});
-    this.render();
   }
 
   render() {

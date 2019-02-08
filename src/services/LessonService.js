@@ -6,6 +6,8 @@ var moduleService = new ModuleService();
 class LessonService {
 
   findAllLessons(courseId, moduleId) {
+    console.log(courseId);
+    console.log(moduleId);
     var module = moduleService.findModuleById(courseId, moduleId);
     return module.lessons ? module.lessons : [];
   }

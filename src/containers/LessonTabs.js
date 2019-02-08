@@ -44,6 +44,7 @@ export default class LessonTabs extends React.Component {
   }
 
   findAllLessonsForModule(moduleId) {
+    console.log(moduleId);
     var lessons = this.lessonService
     .findAllLessons(this.props.courseId, moduleId);
     this.setLessons(lessons);
@@ -63,6 +64,7 @@ export default class LessonTabs extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
+    console.log(newProps);
     this.setModuleId(newProps.moduleId);
     this.setCourseId(newProps.courseId);
     this.findAllLessonsForModule(newProps.moduleId)
