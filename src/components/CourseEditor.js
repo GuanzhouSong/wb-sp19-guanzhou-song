@@ -1,80 +1,40 @@
 import React from 'react'
-import ModuleList from "./ModuleList";
-import LessonTabs from "./LessonTabs";
-import TopicPills from "./TopicPills";
-import CourseService from "../services/CourseService";
-import WidgetListContainer from '../containers/WidgetListContainer'
-import widgetReducer from '../reducers/WidgetReducer'
-import "../../node_modules/bootstrap/dist/js/bootstrap.min"
-import {createStore} from 'redux'
-import {Provider} from 'react-redux'
+import ModuleList from './ModuleList'
+import ModuleEditor from "./ModuleEditor";
+import {Route} from 'react-router-dom'
 
-const store = createStore(widgetReducer);
 
 class CourseEditor extends React.Component {
   constructor(props) {
-    super(props);
-    this.courseService = new CourseService();
-    const courseId = props.match.params.id;
-    const course = this.courseService.findCourseById(courseId);
-    this.state = {
-      course: course,
-      module: course.modules[0],
-      lesson: course.modules[0].lessons[0]
-    }
+    super(props)
+    this.state = {courseId: ''};
+    this.selectCourse = this.selectCourse.bind(this);
+  }
+  
+  selectCourse(courseId) {
+    this.setState({courseId: courseId});
   }
 
-  selectModule = module =>
-      this.setState({
-        module: module
-      });
 
-  selectLesson = lesson =>
-      this.setState({
-        lesson: lesson
-      });
-
-  lessonChanged = (event) => {
-    this.setState(
-        {
-          lesson: {title: event.target.key}
-        });
-  };
-
-  changeTopics = () => {
-
-  };
 
   render() {
     return (
+
         <div>
-          <h2>Course Editor: {this.state.course.title}</h2>
+          {/*<h2>Editing course: {this.state.courseId}</h2>*/}
           <div className="row">
             <div className="col-4">
-              <ModuleList
-                  courseId={this.state.course.id}
-                  selectModule={this.selectModule}
-                  modules={this.state.course.modules}/>
+              <ModuleList courseId={this.state.courseId}/>
             </div>
             <div className="col-8">
-              <LessonTabs
-                  courseId={this.state.course.id}
-                  moduleId={this.state.module.id}
-                  lessons={this.state.module.lessons}
-                  onClick={this.selectLesson}
-              />
-              <TopicPills courseId={this.state.course.id}
-                          moduleId={this.state.module.id}
-                          lessonId={this.state.lesson.id}
-                          lesson={this.state.lesson.topics}/>
-              <Provider store={store}>
-                <WidgetListContainer/>
-              </Provider>
-
+              <Route path="/course/:courseId/module/:moduleId"
+                     component={ModuleEditor}>
+              </Route>
             </div>
           </div>
         </div>
-    )
+
+    );
   }
 }
 
