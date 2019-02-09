@@ -108,7 +108,7 @@ export default class TopicTabs extends React.Component {
                              moduleId={this.props.moduleId}
                              lessonId={this.props.lessonId}
                              topic={topic}
-                             selectTopic={this.selectTopic}
+                             selectTopic={this.props.selectTopic}
                              topicId={topic.id}
                              deleteTopic={this.deleteTopic}/>
           });

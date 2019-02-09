@@ -23,6 +23,8 @@ export default class LessonEditor extends React.Component {
     this.selectModule = this.selectModule.bind(this);
     this.selectCourse = this.selectCourse.bind(this);
     this.selectLesson = this.selectLesson.bind(this);
+    this.setTopic = this.setTopic.bind(this);
+    this.selectTopic = this.selectTopic.bind(this);
   }
 
   selectModule(moduleId) {
@@ -35,6 +37,10 @@ export default class LessonEditor extends React.Component {
 
   selectLesson(lessonId) {
     this.setState({lessonId: lessonId});
+  }
+
+  setTopic(topicId) {
+    this.setState({topicId: topicId});
   }
 
   componentDidMount() {
@@ -51,6 +57,10 @@ export default class LessonEditor extends React.Component {
     this.selectLesson(newProps.lessonId);
   }
 
+  selectTopic(e) {
+    this.setState({topicId: e.target.getAttribute("id")});
+  }
+
   render() {
     return (
         <div>
@@ -59,6 +69,7 @@ export default class LessonEditor extends React.Component {
             <TopicTabs moduleId={this.props.moduleId}
                        courseId={this.props.courseId}
                        lessonId={this.props.lessonId}
+                       selectTopic={this.selectTopic}
             />
           </div>
           <TopicEditor moduleId={this.props.moduleId}
@@ -69,5 +80,3 @@ export default class LessonEditor extends React.Component {
     );
   }
 }
-
-// provider fixme
