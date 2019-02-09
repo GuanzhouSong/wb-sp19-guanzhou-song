@@ -32,6 +32,7 @@ class WidgetList extends React.Component {
 
                 <button className="btn btn-success mr-2">Save</button>
                 <span className="mr-2">Preview</span>
+
                 <a onClick={this.props.togglePreview}>
                   {this.props.preview ? <i className="fa fa-2x fa-toggle-on"/> :
                       <i

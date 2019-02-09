@@ -22,6 +22,7 @@ const WidgetComponent = ({isTail, widget, deleteWidget, updateWidget, widgetMovi
             widget.type == 'PARAGRAPH' && <h2>Paragraph Widget</h2>
           }
         </div>
+        <h1>{widget.id}</h1>
         <div className="col-5">
           {
             widget.order !== 0 && <button className="btn btn-warning"

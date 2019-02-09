@@ -8,6 +8,7 @@ const LinkWidget = ({widget, updateWidget, preview}) =>
             widget.url = event.target.value;
             updateWidget(widget)
           }}
+          placeholder="Link URL"
           className="form-control"/>
       <input
           value={widget.text}
@@ -15,6 +16,7 @@ const LinkWidget = ({widget, updateWidget, preview}) =>
             widget.text = event.target.value;
             updateWidget(widget)
           }}
+          placeholder="Link Text"
           className="form-control"/>
       <input
           value={widget.name}
@@ -22,6 +24,7 @@ const LinkWidget = ({widget, updateWidget, preview}) =>
             widget.name = event.target.value;
             updateWidget(widget)
           }}
+          placeholder="Widget Name"
           className="form-control"/>
       <div hidden={!preview}>
         <h3>Preview</h3>

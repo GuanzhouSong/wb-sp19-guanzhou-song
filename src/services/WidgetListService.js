@@ -24,7 +24,7 @@ class WidgetListService {
       ...topicService.findTopicById(courseId, moduleId, lessonId, topicId)
     };
     var widgets = topic.widgets ? topic.widgets : [];
-    return [...widgets];
+    return widgets;
   }
 
   findWidgetById(courseId, moduleId, lessonId, topicId, widgetId) {

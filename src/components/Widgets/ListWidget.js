@@ -23,6 +23,7 @@ const ListWidget = ({widget, updateWidget, preview}) =>
             widget.name = event.target.value;
             updateWidget(widget)
           }}
+          placeholder="Widget Name"
           className="form-control"/>
       <div hidden={!preview}>
         <h3>Preview</h3>

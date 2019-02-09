@@ -10,10 +10,12 @@ const widgetReducer = (state = {widgets: [], preview: false},
         preview: state.preview
       };
     case 'ADD_WIDGET':
+      console.log(state.widgets.length);
       return {
         widgets: [
           ...state.widgets,
           {
+            id: (new Date()).getTime(),
             type: 'HEADING',
             text: 'New Widget',
             size: 1,

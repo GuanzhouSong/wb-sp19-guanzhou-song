@@ -20,13 +20,15 @@ const HeadingWidget = ({widget, updateWidget, preview}) =>
             widget.text = event.target.value;
             updateWidget(widget)
           }}
-          className="form-control"/>
+          className="form-control"
+          placeholder="Heading Text"/>
       <input
           value={widget.name}
           onChange={event => {
             widget.name = event.target.value;
             updateWidget(widget)
           }}
+          placeholder="Widget Name"
           className="form-control"/>
       <div hidden={!preview}>
         <h3>Preview</h3>
