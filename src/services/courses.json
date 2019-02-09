@@ -1,6 +1,4 @@
-import React from 'react';
-
-var courses = [
+[
   {
     "id": "123",
     "title": "CS5800",
@@ -34,7 +32,8 @@ var courses = [
                     "type": "IMAGE",
                     "order": 1,
                     "link": "https://picsum.photos/300/200"
-                  }, {
+                  },
+                  {
                     "id": 3,
                     "title": "Widget 3",
                     "type": "HEADING",
@@ -42,7 +41,8 @@ var courses = [
                     "text": "This is a heading",
                     "size": 2,
                     "order": 2
-                  }, {
+                  },
+                  {
                     "id": 4,
                     "title": "Widget 4",
                     "type": "LIST",
@@ -50,7 +50,8 @@ var courses = [
                     "text": "This is a list",
                     "ordered": 1,
                     "order": 3
-                  }, {
+                  },
+                  {
                     "id": 5,
                     "title": "Widget 5",
                     "type": "LINK",
@@ -58,7 +59,8 @@ var courses = [
                     "text": "This is a link",
                     "order": 4,
                     "url": "https://www.baidu.com"
-                  }, {
+                  },
+                  {
                     "id": 6,
                     "title": "Widget 6",
                     "type": "PARAGRAPH",
@@ -76,8 +78,7 @@ var courses = [
                     "id": "1",
                     "type": "HEADING",
                     "size": 1,
-                    "text": "HTML CSS",
-                    "order": 0
+                    "text": "HTML CSS"
                   }
                 ]
               }
@@ -95,8 +96,7 @@ var courses = [
                     "id": "1",
                     "type": "HEADING",
                     "size": 1,
-                    "text": "CSS#",
-                    "order": 0
+                    "text": "CSS#"
                   }
                 ]
               },
@@ -108,8 +108,7 @@ var courses = [
                     "id": "1",
                     "type": "HEADING",
                     "size": 1,
-                    "text": "bootstrap flex",
-                    "order": 0
+                    "text": "bootstrap flex"
                   }
                 ]
               }
@@ -133,20 +132,17 @@ var courses = [
                     "id": "1",
                     "type": "HEADING",
                     "size": 1,
-                    "text": "The is JSX doc",
-                    "order": 0
+                    "text": "The is JSX doc"
                   },
                   {
                     "id": "2",
                     "type": "PARAGRAPH",
-                    "text": "intro to Components",
-                    "order": 1
+                    "text": "intro to Components"
                   },
                   {
                     "id": "3",
                     "type": "LIST",
-                    "items": " ",
-                    "order": 2
+                    "items": " "
                   }
                 ]
               }
@@ -170,8 +166,7 @@ var courses = [
                     "id": "1",
                     "type": "HEADING",
                     "size": 1,
-                    "text": "redux",
-                    "order": 0
+                    "text": "redux"
                   }
                 ]
               }
@@ -181,40 +176,4 @@ var courses = [
       }
     ]
   }
-];
-
-class CourseService {
-
-  findAllCourses() {
-    return courses ? courses : [];
-  }
-
-  findCourseById(courseId) {
-    return courses.filter(course => course.id == courseId)[0];
-  }
-
-  updateCourse(courseId, course) {
-    courses = courses.map(s => {
-      if (s.id === courseId) {
-        return course
-      } else {
-        return s;
-      }
-    });
-  }
-
-  deleteCourse(courseId) {
-    courses = courses.filter(course => {
-      return course.id !== courseId;
-    });
-  }
-
-  createCourse(course) {
-
-    courses.push(course)
-
-  }
-
-}
-
-export default CourseService;
+]
