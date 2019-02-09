@@ -76,7 +76,8 @@ var courses = [
                     "id": "1",
                     "type": "HEADING",
                     "size": 1,
-                    "text": "HTML CSS"
+                    "text": "HTML CSS",
+                    "order": 0
                   }
                 ]
               }
@@ -94,7 +95,8 @@ var courses = [
                     "id": "1",
                     "type": "HEADING",
                     "size": 1,
-                    "text": "CSS#"
+                    "text": "CSS#",
+                    "order": 0
                   }
                 ]
               },
@@ -106,7 +108,8 @@ var courses = [
                     "id": "1",
                     "type": "HEADING",
                     "size": 1,
-                    "text": "bootstrap flex"
+                    "text": "bootstrap flex",
+                    "order": 0
                   }
                 ]
               }
@@ -130,17 +133,20 @@ var courses = [
                     "id": "1",
                     "type": "HEADING",
                     "size": 1,
-                    "text": "The is JSX doc"
+                    "text": "The is JSX doc",
+                    "order": 0
                   },
                   {
                     "id": "2",
                     "type": "PARAGRAPH",
-                    "text": "intro to Components"
+                    "text": "intro to Components",
+                    "order": 1
                   },
                   {
                     "id": "3",
                     "type": "LIST",
-                    "items": " "
+                    "items": " ",
+                    "order": 2
                   }
                 ]
               }
@@ -164,7 +170,8 @@ var courses = [
                     "id": "1",
                     "type": "HEADING",
                     "size": 1,
-                    "text": "redux"
+                    "text": "redux",
+                    "order": 0
                   }
                 ]
               }

@@ -1,3 +1,6 @@
+import WidgetListService from "../services/WidgetListService";
+
+var widgetService = new WidgetListService();
 const widgetReducer = (state = {widgets: [], preview: false},
     action) => {
   switch (action.type) {
@@ -34,7 +37,8 @@ const widgetReducer = (state = {widgets: [], preview: false},
       };
     case 'FIND_ALL_WIDGETS_FOR_TOPIC':
       return {
-        widgets: state.widgets,
+        widgets: widgetService.findAllWidgetsForTopic(action.courseId,
+            action.moduleId, action.lessonId, action.topicId),
         preview: state.preview
       };
     case 'FIND_ALL_WIDGETS':

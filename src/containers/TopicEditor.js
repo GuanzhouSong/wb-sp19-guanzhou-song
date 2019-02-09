@@ -1,6 +1,8 @@
 import React from 'react'
 import WidgetReducer from "../reducers/WidgetReducer";
-import {createStore} from 'redux'
+import {createStore} from 'redux';
+import {Provider} from 'react-redux'
+import WidgetContainer from "./WidgetListContainer";
 
 const store = createStore(WidgetReducer);
 export default class TopicEditor extends React.Component {
@@ -10,7 +12,8 @@ export default class TopicEditor extends React.Component {
     this.state = {
       moduleId: this.props.moduleId,
       courseId: this.props.courseId,
-      lessonId: this.props.lessonId
+      lessonId: this.props.lessonId,
+      topicId: this.props.topicId
     };
     this.selectModule = this.selectModule.bind(this);
     this.selectCourse = this.selectCourse.bind(this);
@@ -31,7 +34,16 @@ export default class TopicEditor extends React.Component {
 
   render() {
     return (
-        <div></div>
+        <div>
+          <Provider store={store}>
+            <WidgetContainer
+                courseId={this.props.courseId}
+                moduleId={this.props.moduleId}
+                lessonId={this.props.lessonId}
+                topicId={this.props.topicId}
+            />
+          </Provider>
+        </div>
     );
   }
 }

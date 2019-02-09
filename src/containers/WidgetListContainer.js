@@ -1,12 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import WidgetList from './WidgetList'
+import WidgetListService from "../services/WidgetListService";
 
 const stateToPropertyMapper = state => ({
   widgets: state.widgets,
   preview: state.preview
 });
 
+var widgetService = new WidgetListService();
 const dispatchToPropertyMapper = dispatch => ({
   deleteWidget: widget =>
       dispatch({
@@ -28,9 +30,14 @@ const dispatchToPropertyMapper = dispatch => ({
             widget: widget
           }
       ),
-  findAllWidgetsForTopic: () =>
+  findAllWidgetsForTopic: (courseId, moduleId, lessonId, topicId) =>
       dispatch({
-        type: 'FIND_ALL_WIDGETS_FOR_TOPIC'
+        type: 'FIND_ALL_WIDGETS_FOR_TOPIC',
+        courseId: courseId,
+        moduleId: moduleId,
+        lessonId: lessonId,
+        topicId: topicId
+
       }),
   findAllWidgets: () =>
       dispatch({

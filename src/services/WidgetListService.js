@@ -1,6 +1,6 @@
 import React from 'react'
 
-import TopicService from 'TopicService'
+import TopicService from './TopicService'
 
 var topicService = new TopicService();
 
@@ -20,6 +20,7 @@ class WidgetListService {
   }
 
   findAllWidgetsForTopic(courseId, moduleId, lessonId, topicId) {
+    alert("find");
     var topic = {
       ...topicService.findTopicById(courseId, moduleId, lessonId, topicId)
     };
