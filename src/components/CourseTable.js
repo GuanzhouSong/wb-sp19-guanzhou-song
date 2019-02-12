@@ -3,11 +3,33 @@ import CourseRow from "./CourseRow";
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import './CourseTable.css';
+import CourseService from "../services/CourseService";
 
 export default class CourseTable extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
+    this.courseService = new CourseService();
+    this.state = {
+      courses: []
+    }
   }
+
+  componentDidMount = () =>
+      this.findAllCourses();
+
+  findAllCourses = () => {
+    var courses = this.courseService.findAllCourses();
+    this.setState(
+        {courses: courses})
+  };
+
+  deleteCourse = courseId =>
+      this.courseService.deleteCourse(courseId);
+
+  createCourse = () =>
+      this.courseService
+      .createCourse(this.state.course).then(() =>
+          this.findAllCourses());
 
   render() {
     return (
@@ -50,8 +72,9 @@ export default class CourseTable extends React.Component {
             </tr>
             </thead>
             <tbody>
-            {this.props.courses.map((course) =>
-                <CourseRow course={course}/>
+            {this.state.courses.map((course, idx) =>
+                <CourseRow key={idx} course={course}
+                           deleteCourse={this.deleteCourse}/>
             )}
             </tbody>
           </table>

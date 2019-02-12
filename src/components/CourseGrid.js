@@ -2,11 +2,34 @@ import React from 'react';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import CourseCard from '../components/CourseCard'
+import CourseService from "../services/CourseService";
 
 export default class CourseGrid extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
+    this.courseService = new CourseService();
+    this.state = {
+      courses: []
+    }
   }
+
+  componentDidMount = () =>
+      this.findAllCourses();
+
+  findAllCourses = () => {
+    var courses = this.courseService.findAllCourses();
+    this.setState(
+        {courses: courses})
+  };
+
+  deleteCourse = courseId =>
+      this.courseService.deleteCourse(courseId);
+
+  createCourse = () =>
+      this.courseService
+      .createCourse(this.state.course).then(() =>
+          this.findAllCourses());
+
 
   render() {
     return (
@@ -48,8 +71,9 @@ export default class CourseGrid extends React.Component {
             </thead>
           </table>
           <div className="card-deck">
-            {this.props.courses.map((course, key) =>
-                <CourseCard course={course} key={key}/>)}
+            {this.state.courses.map((course, key) =>
+                <CourseCard course={course} key={key}
+                            deleteCourse={this.deleteCourse}/>)}
           </div>
         </div>
     )

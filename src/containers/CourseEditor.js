@@ -20,6 +20,20 @@ class CourseEditor extends React.Component {
     this.setState({moduleId: e.target.getAttribute("id")});
   }
 
+  selectCourse = courseId => {
+    this.setState({courseId: courseId});
+  };
+
+  componentDidMount() {
+    this.selectCourse
+    (this.props.match.params.courseId);
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.selectCourse
+    (newProps.match.params.courseId);
+  }
+
   render() {
     return (
 

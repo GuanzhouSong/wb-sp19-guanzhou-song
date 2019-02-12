@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 
-const CourseCard = ({course, selectCourse}) => {
+const CourseCard = ({course, selectCourse, deleteCourse}) => {
   return (
       <div className="container p-0 col-sm-12 col-md-4 col-lg-2 h-100">
         <div className="card" styles="width: '280rem'">
@@ -17,6 +17,8 @@ const CourseCard = ({course, selectCourse}) => {
             <p className="card-text">{course.title}</p>
             <Link className="btn btn-primary" onClick={() => selectCourse()}
                   to={`/course/edit/${course.id}`}>More...</Link>
+            <a className="btn btn-primary"
+               onClick={() => deleteCourse(course.id)}>Delete</a>
           </div>
         </div>
       </div>

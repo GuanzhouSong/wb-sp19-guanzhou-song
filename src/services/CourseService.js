@@ -183,15 +183,18 @@ var courses = [
   }
 ];
 
+var COURSE_API_URL = "http://localhost:8080/api/course";
+
 class CourseService {
 
   findAllCourses() {
-    return courses ? courses : [];
+    /*return fetch(COURSE_API_URL).then(response => response.json());*/
+    return courses
   }
 
-  findCourseById(courseId) {
-    return courses.filter(course => course.id == courseId)[0];
-  }
+  findCourseById = courseId =>
+      fetch(COURSE_API_URL + "/" + courseId)
+      .then(response => response.json());
 
   updateCourse(courseId, course) {
     courses = courses.map(s => {
@@ -203,16 +206,20 @@ class CourseService {
     });
   }
 
-  deleteCourse(courseId) {
-    courses = courses.filter(course => {
-      return course.id !== courseId;
-    });
-  }
+  deleteCourse = courseId => fetch(COURSE_API_URL + "/" + courseId, {
+    method: 'delete', headers: {
+      'content-type': 'application/json'
+    }
+  }).then(response => response.json());
 
   createCourse(course) {
-
-    courses.push(course)
-
+    fetch(COURSE_API_URL, {
+      body: JSON.stringify(course),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST'
+    }).then(response => response.json())
   }
 
 }
