@@ -10,7 +10,7 @@ const CourseRow = ({course, deleteCourse}) => {
           <i class="fa fa-book"></i>
         </td>
         <td>
-          <Link to={`/course/edit/${course.id}`}>
+          <Link to={`/course/${course.id}`}>
             {course.title}
           </Link>
         </td>

@@ -1,27 +1,31 @@
-import React from 'react'
+import React from 'react';
+import {Link} from 'react-router-dom'
 
-class ModuleListItem extends React.Component {
+export default class ModuleListItem
+    extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    return (
-        <li className="nav-item" id={this.props.id}>
-          <a className="nav-link" data-toggle="pill"
-             href='#'>
-            <a href='#' id={this.props.id} onClick={this.props.selectModule}>
-            {this.props.module.title}
-            </a>
-            <i className="fa fa-trash-o pr-4 pull-right" id={this.props.id}
-               onClick={this.props.deleteModule}/>
-            <i className="fa fa-edit pr-4 pull-right"
-               id={this.props.id}/>
-          </a>
-        </li>
 
-    )
+    return (
+        <tr>
+          <td>
+            <Link
+                to={`/course/${this.props.courseId}/module/${this.props.module.id}`}>
+              {this.props.module.title}
+            </Link>
+          </td>
+          <td>
+            <Link to={`/course/${this.props.courseId}`}>
+              <i onClick=
+                     {() => this.props.deleteModule(this.props.module.id)}
+                 className="fa fa-trash"></i>
+            </Link>
+
+          </td>
+        </tr>
+    );
   }
 }
-
-export default ModuleListItem;

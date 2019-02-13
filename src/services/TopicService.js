@@ -7,7 +7,7 @@ var TOPIC_API_URL = "http://localhost:8080/api/topic/";
 
 
 class TopicService {
-  findAllTopics(courseId, moduleId, lessonId) {
+  findAllTopics(lessonId) {
     return fetch(LESSON_API_URL + lessonId + "/topic"
     ).then(response => response.json());
   }
@@ -17,7 +17,7 @@ class TopicService {
     ).then(response => response.json());
   }
 
-  deleteTopic(courseId, moduleId, lessonId, topicId) {
+  deleteTopic(topicId) {
     return fetch(TOPIC_API_URL + topicId, {
       method: 'delete'
     });
@@ -33,8 +33,8 @@ class TopicService {
     }).then(response => response.json())
   }
 
-  createTopic(courseId, moduleId, lessonId, topic) {
-    return fetch(MODULE_API_URL + moduleId + "/lesson", {
+  createTopic(lessonId, topic) {
+    return fetch(LESSON_API_URL + lessonId + "/topic", {
       body: JSON.stringify(topic),
       headers: {
         'Content-Type': 'application/json'

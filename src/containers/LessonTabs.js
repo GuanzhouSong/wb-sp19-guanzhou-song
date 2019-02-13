@@ -5,42 +5,31 @@ import LessonService from '../services/LessonService'
 export default class LessonTabs extends React.Component {
   constructor(props) {
     super(props);
-    this.lessonService = new LessonService();
     console.log(props);
     this.state = {
-      moduleId: this.props.moduleId,
-      courseId: this.props.courseId,
-      lessons: [],
-      lesson: {
-        title: 'New Lesson'
-      }
+      moduleId: '',
+      courseId: '',
+      lesson: {title: ''},
+      lessons: []
     };
     this.createLesson = this.createLesson.bind(this);
     this.titleChanged = this.titleChanged.bind(this);
+    this.deleteLesson = this.deleteLesson.bind(this);
     this.setModuleId = this.setModuleId.bind(this);
     this.setCourseId = this.setCourseId.bind(this);
-
+    this.lessonService = new LessonService();
   }
 
   setLessons(lessons) {
     this.setState({lessons: lessons})
   }
 
-  componentDidMount = () => {
-    this.findAllLessonsForModule(this.props.courseId, this.props.moduleId)
-  };
-
-  findAllLessonsForModule(courseId, moduleId) {
-
-    this.lessonService.findAllLessons(courseId, moduleId).then(
-        lessons => {
-          this.setState({
-            lessons: lessons
-          });
-          console.log(lessons)
-        }
-    );
-
+  findAllLessonsForModule(moduleId) {
+    this.lessonService
+    .findAllLessons(this.props.courseId, moduleId)
+    .then((lessons) => {
+      this.setLessons(lessons)
+    });
   }
 
   setModuleId(moduleId) {
@@ -51,35 +40,40 @@ export default class LessonTabs extends React.Component {
     this.setState({courseId: courseId});
   }
 
+  componentDidMount() {
+    this.setModuleId(this.props.moduleId);
+    this.setCourseId(this.props.courseId);
+  }
+
   componentWillReceiveProps(newProps) {
     console.log(newProps);
     this.setModuleId(newProps.moduleId);
     this.setCourseId(newProps.courseId);
-    this.findAllLessonsForModule(newProps.moduleId);
-
+    this.findAllLessonsForModule(newProps.moduleId)
   }
 
   createLesson() {
+    console.log(this.state.lesson);
     this.lessonService
-    .createLesson(this.props.courseId, this.props.moduleId, this.state.lesson);
-    this.lessonService
-    .findAllLessons(this.props.courseId, this.props.moduleId);
-    this.setState({
-      lesson: {
-        title: '',
-        id: (new Date()).getTime()
-      }
+    .createLesson(this.props.courseId, this.props.moduleId, this.state.lesson)
+    .then(() => {
+      this.findAllLessonsForModule(this.props.moduleId);
     });
+    this.setState({lesson: {title: ''}});
   }
 
   titleChanged(event) {
-    this.setState(
-        {
-          lesson: {
-            title: event.target.value,
-            id: (new Date()).getTime()
-          }
-        });
+    console.log(event.target.value);
+    this.setState({lesson: {title: event.target.value}});
+  }
+
+  deleteLesson(lessonId) {
+    console.log('delete');
+    this.lessonService
+    .deleteLesson(lessonId)
+    .then(() => {
+      this.findAllLessonsForModule(this.props.moduleId);
+    });
   }
 
   renderListOfLessons() {
@@ -89,11 +83,8 @@ export default class LessonTabs extends React.Component {
       lessons = this.state.lessons.map(
           (lesson) => {
             return <LessonTab courseId={this.props.courseId}
-                              moduleId={this.props.moduleId}
-                              lessonId={lesson.id}
-                              selectLesson={this.props.selectLesson}
-                              lesson={lesson}
-                              deleteLesson={this.props.deleteLesson}/>
+                              moduleId={this.props.moduleId} lesson={lesson}
+                              key={lesson.id} deleteLesson={this.deleteLesson}/>
           });
     }
     return (
@@ -102,8 +93,11 @@ export default class LessonTabs extends React.Component {
   }
 
   render() {
+    console.log(this.state);
+
     return (
         <div>
+          <h3>Lesson List for Module - {this.props.moduleId}</h3>
           <div className="input-group">
 
             <input onChange={this.titleChanged}
@@ -119,6 +113,7 @@ export default class LessonTabs extends React.Component {
           </div>
           <br/>
           <br/>
+
 
           <ul className="nav nav-tabs">
             {this.renderListOfLessons()}

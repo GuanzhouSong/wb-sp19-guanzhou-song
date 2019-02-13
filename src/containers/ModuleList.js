@@ -1,24 +1,21 @@
-import React from 'react'
+import React, {Component} from 'react'
 import ModuleListItem from '../components/ModuleListItem';
 import ModuleService from '../services/ModuleService'
-import CourseService from "../services/CourseService";
 
-class ModuleList extends React.Component {
+export default class ModuleList extends Component {
   constructor(props) {
     super(props);
-    this.moduleService = new ModuleService();
-    this.courseService = new CourseService();
     this.state = {
-      modules: [],
-      module: {
-        title: "new Module"
-      }
+      courseId: '',
+      module: {title: ''},
+      modules: []
     };
+
     this.createModule = this.createModule.bind(this);
     this.titleChanged = this.titleChanged.bind(this);
     this.deleteModule = this.deleteModule.bind(this);
     this.setCourseId = this.setCourseId.bind(this);
-    this.setModule = this.setModule.bind(this);
+    this.moduleService = new ModuleService();
   }
 
   setModules(modules) {
@@ -26,87 +23,103 @@ class ModuleList extends React.Component {
     this.render();
   }
 
-  setModule(module) {
-    this.setState({module: module});
-    this.render();
-  }
-
-  componentDidMount = () => {
-    this.findAllModulesForCourse(this.props.courseId)
-  };
-
   findAllModulesForCourse(courseId) {
-    this.moduleService.findAllModules(courseId).then(
-        modules => this.setModules(modules)
-    );
-
+    this.moduleService
+    .findAllModules(courseId)
+    .then((modules) => {
+      this.setModules(modules)
+    });
   }
 
   setCourseId(courseId) {
     this.setState({courseId: courseId});
   }
 
-  createModule() {
-    this.moduleService
-    .createModule(this.props.courseId, this.state.module);
+  componentDidMount() {
+    this.setCourseId(this.props.courseId);
+  }
 
-    this.findAllModulesForCourse(this.props.courseId);
+  componentWillReceiveProps(newProps) {
+    this.setCourseId(newProps.courseId);
+    this.findAllModulesForCourse(newProps.courseId)
+  }
+
+  createModule() {
+    console.log(this.state.module);
+    this.moduleService
+    .createModule(this.props.courseId, this.state.module)
+    .then(() => {
+      this.findAllModulesForCourse(this.props.courseId);
+    });
+    // document.getElementById('123').value = '';
     this.setState({module: {title: ''}});
 
   }
 
   titleChanged(event) {
-    this.setState(
-        {
-          module: {
-            title: event.target.value,
-            id: (new Date()).getTime()
-          }
-        });
+    console.log(event.target.value);
+    this.setState({module: {title: event.target.value}});
   }
 
-  deleteModule(e) {
-    var moduleId = e.target.getAttribute("id");
-    e.target.setAttribute("id", "del");
+  renderListOfModules() {
+    let modules = null;
+
+    if (this.state) {
+      modules = this.state.modules.map(
+          (module) => {
+            return <ModuleListItem courseId={this.state.courseId}
+                                   module={module} key={module.id}
+                                   deleteModule={this.deleteModule}/>
+          });
+    }
+    return (
+        modules
+    )
+  }
+
+  deleteModule(moduleId) {
+    console.log('delete');
     this.moduleService
-    .deleteModule(this.state.courseId, moduleId);
-    this.findAllModulesForCourse(this.props.courseId)
+    .deleteModule(moduleId)
+    .then(() => {
+      this.findAllModulesForCourse(this.props.courseId)
+    });
   }
 
   render() {
     return (
-        <div>
-          <h3>Module List</h3>
-          <ul className="nav flex-column nav-pills">
-            <li className="list-group-item">
-              <input onChange={this.titleChanged}
-                     id="123"
-                     value={this.state.module.title}
-                     placeholder="new module"
-                     className="form-control"/>
-              <button onClick={this.createModule}
-                      className="btn btn-primary btn-block">
-                <i className="fa fa-plus"></i>
-              </button>
-            </li>
+        <div className='container'>
+          <h3>Module List for Course - {this.state.courseId}</h3>
+          <table className="table">
 
-            {
-              this.state.modules.map(
-                  (module) => {
-                    return (
-                        <ModuleListItem selectModule={this.props.selectModule}
-                                        courseId={this.state.courseId}
-                                        module={module} id={module.id}
-                                        key={module.id}
-                                        deleteModule={this.deleteModule}/>
-                    )
-                  }
-              )
-            }
-          </ul>
+
+            <thead>
+            <tr>
+              <th><input onChange={this.titleChanged}
+                         id="123"
+                         value={this.state.module.title}
+                         placeholder="title"
+                         className="form-control"/>
+              </th>
+              <th>
+                <button onClick={this.createModule}
+                        className="btn btn-primary btn-block">
+                  <i className="fa fa-plus"></i>
+                </button>
+              </th>
+            </tr>
+            </thead>
+
+
+            <tbody>
+            {this.renderListOfModules()}
+            </tbody>
+          </table>
         </div>
-    )
+    );
   }
+
 }
 
-export default ModuleList;
+
+

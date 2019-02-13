@@ -8,7 +8,7 @@ var LESSON_API_URL = "http://localhost:8080/api/lesson/";
 class LessonService {
 
   findAllLessons(courseId, moduleId) {
-    return fetch(LESSON_API_URL + moduleId + "/lesson"
+    return fetch(MODULE_API_URL + moduleId + "/lesson"
     ).then(response => response.json());
   }
 
@@ -17,7 +17,7 @@ class LessonService {
     ).then(response => response.json());
   }
 
-  deleteLesson(courseId, moduleId, lessonId) {
+  deleteLesson(lessonId) {
     return fetch(LESSON_API_URL + lessonId, {
       method: 'delete'
     });

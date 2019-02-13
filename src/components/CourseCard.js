@@ -11,12 +11,12 @@ const CourseCard = ({course, selectCourse, deleteCourse}) => {
                src="https://picsum.photos/300/200"/>
           <div className="card-body">
             <Link onClick={() => selectCourse()}
-                  to={`/course/edit/${course.id}`}>
+                  to={`/course/${course.id}`}>
               <h5 className="card-title">{course.title}</h5>
             </Link>
             <p className="card-text">{course.title}</p>
             <Link className="btn btn-primary" onClick={() => selectCourse()}
-                  to={`/course/edit/${course.id}`}>More...</Link>
+                  to={`/course/${course.id}`}>More...</Link>
             <a className="btn btn-primary"
                onClick={() => deleteCourse(course.id)}>Delete</a>
           </div>

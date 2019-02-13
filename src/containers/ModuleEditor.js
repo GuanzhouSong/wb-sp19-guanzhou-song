@@ -1,23 +1,32 @@
 import React from 'react'
 import LessonTabs from './LessonTabs'
 import LessonEditor from "./LessonEditor";
-import LessonService from "../services/LessonService";
+import {Route} from 'react-router-dom'
 
 export default class ModuleEditor
     extends React.Component {
 
   constructor(props) {
     super(props);
-    this.lessonService = new LessonService();
     this.state = {
-      moduleId: this.props.moduleId,
-      courseId: this.props.courseId,
-      lessons: []
+      moduleId: this.props.match.params.moduleId,
+      courseId: this.props.match.params.courseId
     };
     this.selectModule = this.selectModule.bind(this);
     this.selectCourse = this.selectCourse.bind(this);
-    this.selectLesson = this.selectLesson.bind(this);
-    this.deleteLesson = this.deleteLesson.bind(this);
+  }
+
+  componentDidMount() {
+    this.selectModule
+    (this.props.match.params.moduleId);
+    this.selectCourse
+    (this.props.match.params.courseId);
+  }
+
+  componentWillReceiveNewProps(newProps) {
+    this.selectModule
+    (newProps.match.params.moduleId);
+    this.selectCourse(newProps.match.params.courseId);
   }
 
   selectModule(moduleId) {
@@ -28,51 +37,16 @@ export default class ModuleEditor
     this.setState({courseId: courseId});
   }
 
-  selectLesson(e) {
-    this.setState({lessonId: e.target.getAttribute("id")});
-  }
-
-  findAllLessonsForModule(moduleId) {
-    this.lessonService.findAllLessons(this.props.courseId,
-        this.props.moduleId).then(
-        lessons => this.setState({
-          lessons: lessons
-        })
-    );
-  }
-
-  componentDidMount() {
-    this.findAllLessonsForModule(this.props.lessonId)
-  }
-
-  componentDidReceiveNewProps(newProps) {
-    this.selectModule
-    (newProps.moduleId);
-    this.selectCourse(newProps.courseId);
-  }
-
-  deleteLesson(e) {
-    this.lessonService
-    .deleteLesson(this.state.courseId, this.state.moduleId,
-        e.target.getAttribute("id"));
-
-    this.lessonService
-    .findAllLessons(this.state.courseId, this.state.moduleId);
-  }
-
   render() {
     return (
         <div>
-
           <div className="col-8">
-            <LessonTabs moduleId={this.props.moduleId}
-                        courseId={this.props.courseId}
-                        selectLesson={this.selectLesson}
-                        deleteLesson={this.deleteLesson}/>
+            <LessonTabs moduleId={this.props.match.params.moduleId}
+                        courseId={this.props.match.params.courseId}/>
           </div>
-          <LessonEditor moduleId={this.props.moduleId}
-                        courseId={this.props.courseId}
-                        lessonId={this.state.lessonId}/>
+          <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId"
+                 component={LessonEditor}>
+          </Route>
         </div>
     );
   }

@@ -1,51 +1,28 @@
 import React from 'react'
 import ModuleList from './ModuleList'
-import ModuleService from "../services/ModuleService"
+import ModuleEditor from "./ModuleEditor";
+import {Route} from 'react-router-dom'
 
-class CourseEditor extends React.Component {
-
+export default class CourseEditor extends React.Component {
   constructor(props) {
     super(props);
-    this._isMounted = false;
-    this.ModuleService = new ModuleService();
-    this.state = {
-      courseId: this.props.match.params.id,
-    };
-    console.log(this.state);
-    this.selectModule = this.selectModule.bind(this);
+    this.state = {courseId: ''};
+    this.selectCourse = this.selectCourse.bind(this);
   }
 
-  componentDidMount = () => {
-    this._isMounted = true;
-    this.findAllModules(this.props.match.params.id)
-  };
+  componentDidMount() {
+    this.selectCourse
+    (this.props.match.params.courseId);
 
-  findAllModules(courseId) {
-    if (this._isMounted) {
-      this.ModuleService.findAllModules(courseId).then(
-          data => {
-            if (data.length != 0) {
-              this.setState({
-                moduleId: data[0].id
-              })
-            }
-          }
-      )
-    }
   }
-
-  selectModule(e) {
-    this.setState({moduleId: e.target.getAttribute("id")});
-  }
-
-  selectCourse = courseId => {
-    this.setState({courseId: courseId});
-  };
 
   componentWillReceiveProps(newProps) {
     this.selectCourse
     (newProps.match.params.courseId);
+  }
 
+  selectCourse(courseId) {
+    this.setState({courseId: courseId});
   }
 
   render() {
@@ -54,18 +31,16 @@ class CourseEditor extends React.Component {
         <div>
           <div className="row">
             <div className="col-4">
-              <ModuleList courseId={this.state.courseId}
-                          selectModule={this.selectModule}/>
+              <ModuleList courseId={this.state.courseId}/>
             </div>
-            {/*<div className="col-8">
-              <ModuleEditor courseId={this.state.courseId}
-                            moduleId={this.state.moduleId}/>
-            </div>*/}
+            <div className="col-8">
+              <Route path="/course/:courseId/module/:moduleId"
+                     component={ModuleEditor}>
+              </Route>
+            </div>
           </div>
         </div>
 
     );
   }
 }
-
-export default CourseEditor

@@ -18,8 +18,7 @@ class WhiteBoard extends Component {
               <Route path='/' exact
                      render={() =>
                          <CourseGrid/>}/>
-              <Route path="/course/edit/:id"
-                     exact
+              <Route path="/course/:courseId"
                      component={CourseEditor}/>
               <Route path='/table'
                      render={() => <CourseTable/>}/>
