@@ -1,51 +1,46 @@
 import React from 'react';
-import LessonService from "./LessonService";
 
-var lessonService = new LessonService();
+var COURSE_API_URL = "http://localhost:8080/api/course/";
+var MODULE_API_URL = "http://localhost:8080/api/module/";
+var LESSON_API_URL = "http://localhost:8080/api/lesson/";
+var TOPIC_API_URL = "http://localhost:8080/api/topic/";
+
 
 class TopicService {
   findAllTopics(courseId, moduleId, lessonId) {
-    let lesson = lessonService.findLessonById(courseId, moduleId, lessonId);
-    return lesson ? (lesson.topics ? lesson.topics : []) : [];
+    return fetch(LESSON_API_URL + lessonId + "/topic"
+    ).then(response => response.json());
   }
 
   findTopicById(courseId, moduleId, lessonId, topicId) {
-    let topics = this.findAllTopics(courseId, moduleId, lessonId);
-    return topics.filter(t => t.id == topicId)[0]
+    return fetch(TOPIC_API_URL + topicId
+    ).then(response => response.json());
   }
 
   deleteTopic(courseId, moduleId, lessonId, topicId) {
-    let lesson = {
-      ...lessonService.findLessonById(courseId, moduleId, lessonId)
-    };
-    let newTopics = lesson.topics.filter(t => t.id != topicId);
-    lesson.topics = newTopics;
-    lessonService.updateLesson(courseId, moduleId, lesson);
+    return fetch(TOPIC_API_URL + topicId, {
+      method: 'delete'
+    });
   }
 
   updateTopic(courseId, moduleId, lessonId, topic) {
-    let topics = this.findAllTopics(courseId, moduleId, lessonId).map(t => {
-      if (t.id == topic.id) {
-        return topic;
-      } else {
-        return t;
+    return fetch(TOPIC_API_URL + topic.id, {
+      method: 'PUT',
+      body: JSON.stringify(topic),
+      headers: {
+        'content-type': 'application/json'
       }
-    });
-    let lesson = {
-      ...lessonService.findLessonById(courseId, moduleId, lessonId)
-    };
-    lesson.topics = topics;
-    lessonService.updateLesson(courseId, moduleId, lesson);
+    }).then(response => response.json())
   }
 
   createTopic(courseId, moduleId, lessonId, topic) {
-    let topics = this.findAllTopics(courseId, moduleId, lessonId);
-    topics.push(topic);
-    let lesson = {
-      ...lessonService.findLessonById(courseId, moduleId, lessonId)
-    };
-    lesson.topics = topics;
-    lessonService.updateLesson(courseId, moduleId, lesson);
+    return fetch(MODULE_API_URL + moduleId + "/lesson", {
+      body: JSON.stringify(topic),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST'
+    }).then(response => response.json())
   }
 }
 

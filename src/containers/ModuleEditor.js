@@ -12,10 +12,7 @@ export default class ModuleEditor
     this.state = {
       moduleId: this.props.moduleId,
       courseId: this.props.courseId,
-      lessons: this.lessonService.findAllLessons(this.props.courseId,
-          this.props.moduleId),
-      lessonId: this.lessonService.findAllLessons(this.props.courseId,
-          this.props.moduleId)[0].id
+      lessons: []
     };
     this.selectModule = this.selectModule.bind(this);
     this.selectCourse = this.selectCourse.bind(this);
@@ -35,13 +32,20 @@ export default class ModuleEditor
     this.setState({lessonId: e.target.getAttribute("id")});
   }
 
-  componentDidMount() {
-    this.selectModule
-    (this.props.moduleId);
-    this.selectCourse(this.props.courseId);
+  findAllLessonsForModule(moduleId) {
+    this.lessonService.findAllLessons(this.props.courseId,
+        this.props.moduleId).then(
+        lessons => this.setState({
+          lessons: lessons
+        })
+    );
   }
 
-  componentWillReceiveNewProps(newProps) {
+  componentDidMount() {
+    this.findAllLessonsForModule(this.props.lessonId)
+  }
+
+  componentDidReceiveNewProps(newProps) {
     this.selectModule
     (newProps.moduleId);
     this.selectCourse(newProps.courseId);

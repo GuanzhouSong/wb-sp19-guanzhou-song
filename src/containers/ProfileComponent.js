@@ -17,12 +17,20 @@ export default class ProfileComponent extends React.Component {
     );
   }
 
-  handleChangeFistName = (e) => {
+  handleChange = (e) => {
     var user = this.state.user;
-    var item = e.target.getAttribute("id");
-    user[item] = e.target.value;
+    var key = e.target.placeholder;
+    console.log(e.target);
+    user[key] = e.target.value;
     this.setState({user: user});
-    console.log(this.state.user)
+    console.log(user)
+  };
+
+  handleChangeRole = (e) => {
+    var user = this.state.user;
+    user["role"] = e.target.value;
+    this.setState({user: user});
+    console.log(user)
   };
 
   render() {
@@ -48,8 +56,10 @@ export default class ProfileComponent extends React.Component {
             </label>
             <div className="col-sm-8">
               <input className="form-control align-middle"
-                     id="usernameFld" value={this.state.user.username}
-                     placeholder="Alice" readOnly/>
+                     id="usernameFld"
+                     onChange={this.handleChange}
+                     value={this.state.user.username}
+                     placeholder="username" readOnly/>
             </div>
           </div>
 
@@ -60,9 +70,10 @@ export default class ProfileComponent extends React.Component {
             </label>
             <div className="col-sm-8">
               <input className="form-control"
-                     id="firstName" Value={this.state.user.firstName}
-                     placeholder="firstname"
-                     onChange={this.handleChangeFistName}/>
+                     id="firstNameFld"
+                     Value={this.state.user.firstName}
+                     placeholder="firstName"
+                     onChange={this.handleChange}/>
             </div>
           </div>
 
@@ -73,8 +84,10 @@ export default class ProfileComponent extends React.Component {
             </label>
             <div className="col-sm-8">
               <input className="form-control"
-                     id="lastName" value={this.state.user.lastName}
-                     placeholder="last name"/>
+                     id="lastName"
+                     onChange={this.handleChange}
+                     value={this.state.user.lastName}
+                     placeholder="lastName"/>
             </div>
           </div>
 
@@ -85,8 +98,10 @@ export default class ProfileComponent extends React.Component {
             </label>
             <div className="col-sm-8">
               <input className="form-control"
-                     id="phone" value={this.state.user.phoneNumber}
-                     placeholder="(555)123-4321"/>
+                     onChange={this.handleChange}
+                     id="phone"
+                     value={this.state.user.phoneNumber}
+                     placeholder="phoneNumber"/>
             </div>
           </div>
 
@@ -97,8 +112,10 @@ export default class ProfileComponent extends React.Component {
             </label>
             <div className="col-sm-8">
               <input className="form-control"
-                     id="email" value={this.state.user.email}
-                     placeholder="Alice@gmail.com"
+                     onChange={this.handleChange}
+                     id="email"
+                     value={this.state.user.email}
+                     placeholder="email"
                      type="email"/>
             </div>
           </div>
@@ -110,6 +127,8 @@ export default class ProfileComponent extends React.Component {
             </label>
             <div className="col-sm-8">
               <select className="form-control" id="role"
+                      placeholder="role"
+                      onChange={this.handleChangeRole}
                       value={this.state.user.role}>
                 <option value="FACULTY">Faculty</option>
                 <option value="STUDENT">Student</option>

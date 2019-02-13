@@ -1,15 +1,18 @@
 import React from 'react'
 import ModuleListItem from '../components/ModuleListItem';
 import ModuleService from '../services/ModuleService'
+import CourseService from "../services/CourseService";
 
 class ModuleList extends React.Component {
   constructor(props) {
     super(props);
     this.moduleService = new ModuleService();
+    this.courseService = new CourseService();
     this.state = {
-      courseId: this.props.courseId,
-      module: {title: ''},
-      modules: this.moduleService.findAllModules(this.props.courseId)
+      modules: [],
+      module: {
+        title: "new Module"
+      }
     };
     this.createModule = this.createModule.bind(this);
     this.titleChanged = this.titleChanged.bind(this);
@@ -28,10 +31,14 @@ class ModuleList extends React.Component {
     this.render();
   }
 
+  componentDidMount = () => {
+    this.findAllModulesForCourse(this.props.courseId)
+  };
+
   findAllModulesForCourse(courseId) {
-    var modules = this.moduleService
-    .findAllModules(courseId);
-    this.setModules(modules)
+    this.moduleService.findAllModules(courseId).then(
+        modules => this.setModules(modules)
+    );
 
   }
 
@@ -90,6 +97,7 @@ class ModuleList extends React.Component {
                         <ModuleListItem selectModule={this.props.selectModule}
                                         courseId={this.state.courseId}
                                         module={module} id={module.id}
+                                        key={module.id}
                                         deleteModule={this.deleteModule}/>
                     )
                   }

@@ -10,13 +10,9 @@ export default class LessonTabs extends React.Component {
     this.state = {
       moduleId: this.props.moduleId,
       courseId: this.props.courseId,
-      lessonId: this.lessonService.findAllLessons(this.props.courseId,
-          this.props.moduleId)[0].id,
-      lessons: this.lessonService.findAllLessons(this.props.courseId,
-          this.props.moduleId),
+      lessons: [],
       lesson: {
-        title: '',
-        id: (new Date()).getTime()
+        title: 'New Lesson'
       }
     };
     this.createLesson = this.createLesson.bind(this);
@@ -30,10 +26,21 @@ export default class LessonTabs extends React.Component {
     this.setState({lessons: lessons})
   }
 
-  findAllLessonsForModule(moduleId) {
-    var lessons = this.lessonService
-    .findAllLessons(this.props.courseId, moduleId);
-    this.setLessons(lessons);
+  componentDidMount = () => {
+    this.findAllLessonsForModule(this.props.courseId, this.props.moduleId)
+  };
+
+  findAllLessonsForModule(courseId, moduleId) {
+
+    this.lessonService.findAllLessons(courseId, moduleId).then(
+        lessons => {
+          this.setState({
+            lessons: lessons
+          });
+          console.log(lessons)
+        }
+    );
+
   }
 
   setModuleId(moduleId) {
@@ -42,11 +49,6 @@ export default class LessonTabs extends React.Component {
 
   setCourseId(courseId) {
     this.setState({courseId: courseId});
-  }
-
-  componentDidMount() {
-    this.setModuleId(this.props.moduleId);
-    this.setCourseId(this.props.courseId);
   }
 
   componentWillReceiveProps(newProps) {

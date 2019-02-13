@@ -8,28 +8,45 @@ import CourseService from "../services/CourseService";
 export default class CourseTable extends React.Component {
   constructor() {
     super();
+
     this.courseService = new CourseService();
     this.state = {
-      courses: []
+      courses: [],
+      course: {
+        title: "new Course"
+      }
     }
   }
 
-  componentDidMount = () =>
-      this.findAllCourses();
+  componentDidMount = () => {
+    this.findAllCourses();
+  };
 
   findAllCourses = () => {
-    var courses = this.courseService.findAllCourses();
-    this.setState(
-        {courses: courses})
+    this.courseService.findAllCourses().then(
+        courses => this.setState(
+            {courses: courses})
+    )
+
   };
 
   deleteCourse = courseId =>
-      this.courseService.deleteCourse(courseId);
+      this.courseService.deleteCourse(courseId).then(() =>
+          this.findAllCourses()
+      );
 
   createCourse = () =>
       this.courseService
       .createCourse(this.state.course).then(() =>
           this.findAllCourses());
+
+  handleChange = e => {
+    this.setState({
+      course: {
+        title: e.target.value
+      }
+    })
+  };
 
   render() {
     return (
@@ -42,9 +59,12 @@ export default class CourseTable extends React.Component {
             </a>
             <form className="form-inline w-100">
               <input className="form-control col-10" type="search"
-                     placeholder="New Course Title"/>
+                     placeholder="New Course Title"
+                     onChange={this.handleChange}
+              />
               <div className="col-2">
-                <a className="btn btn-danger" href="#">
+                <a className="btn btn-danger" href="#"
+                   onClick={this.createCourse}>
                   <i className="fa fa-plus"></i>
                 </a>
               </div>

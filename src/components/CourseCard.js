@@ -6,7 +6,7 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 const CourseCard = ({course, selectCourse, deleteCourse}) => {
   return (
       <div className="container p-0 col-sm-12 col-md-4 col-lg-2 h-100">
-        <div className="card" styles="width: '280rem'">
+        <div className="card" styles="width: '80rem'">
           <img className="card-img-top"
                src="https://picsum.photos/300/200"/>
           <div className="card-body">

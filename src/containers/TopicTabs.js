@@ -10,8 +10,7 @@ export default class TopicTabs extends React.Component {
       moduleId: this.props.moduleId,
       courseId: this.props.courseId,
       lessonId: this.props.lessonId,
-      topics: this.topicService.findAllTopics(this.props.courseId,
-          this.props.moduleId, this.props.lessonId),
+      topics: [],
       topic: {
         title: '',
         id: (new Date()).getTime()
@@ -26,14 +25,25 @@ export default class TopicTabs extends React.Component {
 
   }
 
+  componentWillMount() {
+    this.findAllTopicsForLesson(this.props.lessonId)
+  }
+
   setTopics(topics) {
     this.setState({topics: topics})
   }
 
   findAllTopicsForLesson(lessonId) {
-    var topics = this.topicService
-    .findAllTopics(this.props.courseId, this.props.moduleId, lessonId);
-    this.setTopics(topics);
+    this.topicService.findAllTopics(this.props.courseId, this.props.moduleId,
+        lessonId).then(
+        topics => {
+          this.setState({
+            topics: topics
+          });
+          console.log(topics)
+        }
+    );
+
   }
 
   setModuleId(moduleId) {
@@ -100,8 +110,8 @@ export default class TopicTabs extends React.Component {
 
   renderListOfTopics() {
     let topics = null;
-
-    if (this.state) {
+    console.log(this.state.topics.length != 0, this.state.topics);
+    if (this.state.topics.length != 0) {
       topics = this.state.topics.map(
           (topic) => {
             return <TopicTab courseId={this.props.courseId}

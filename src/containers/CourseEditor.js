@@ -1,19 +1,37 @@
 import React from 'react'
 import ModuleList from './ModuleList'
-import ModuleEditor from "./ModuleEditor";
 import ModuleService from "../services/ModuleService"
 
 class CourseEditor extends React.Component {
+
   constructor(props) {
     super(props);
+    this._isMounted = false;
     this.ModuleService = new ModuleService();
     this.state = {
       courseId: this.props.match.params.id,
-      modules: this.ModuleService.findAllModules(this.props.match.params.id),
-      moduleId: this.ModuleService.findAllModules(
-          this.props.match.params.id)[0].id
     };
+    console.log(this.state);
     this.selectModule = this.selectModule.bind(this);
+  }
+
+  componentDidMount = () => {
+    this._isMounted = true;
+    this.findAllModules(this.props.match.params.id)
+  };
+
+  findAllModules(courseId) {
+    if (this._isMounted) {
+      this.ModuleService.findAllModules(courseId).then(
+          data => {
+            if (data.length != 0) {
+              this.setState({
+                moduleId: data[0].id
+              })
+            }
+          }
+      )
+    }
   }
 
   selectModule(e) {
@@ -24,14 +42,10 @@ class CourseEditor extends React.Component {
     this.setState({courseId: courseId});
   };
 
-  componentDidMount() {
-    this.selectCourse
-    (this.props.match.params.courseId);
-  }
-
   componentWillReceiveProps(newProps) {
     this.selectCourse
     (newProps.match.params.courseId);
+
   }
 
   render() {
@@ -43,10 +57,10 @@ class CourseEditor extends React.Component {
               <ModuleList courseId={this.state.courseId}
                           selectModule={this.selectModule}/>
             </div>
-            <div className="col-8">
+            {/*<div className="col-8">
               <ModuleEditor courseId={this.state.courseId}
                             moduleId={this.state.moduleId}/>
-            </div>
+            </div>*/}
           </div>
         </div>
 

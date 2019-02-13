@@ -10,21 +10,32 @@ export default class LessonEditor extends React.Component {
 
   constructor(props) {
     super(props);
+    this._isMounted = false;
     this.topicService = new TopicService();
     this.state = {
       moduleId: this.props.moduleId,
       courseId: this.props.courseId,
       lessonId: this.props.lessonId,
-      topics: this.topicService.findAllTopics(this.props.courseId,
-          this.props.moduleId, this.props.lessonId),
-      topicId: this.topicService.findAllTopics(this.props.courseId,
-          this.props.moduleId, this.props.lessonId)[0].id
+      topics: []
     };
+    console.log(this.state);
     this.selectModule = this.selectModule.bind(this);
     this.selectCourse = this.selectCourse.bind(this);
     this.selectLesson = this.selectLesson.bind(this);
     this.setTopic = this.setTopic.bind(this);
     this.selectTopic = this.selectTopic.bind(this);
+  }
+
+  componentDidMount() {
+
+    this.topicService.findTopicById(this.props.courseId, this.props.moduleId,
+        this.props.lessonId).then(
+        topics => {
+          this.setState({topics: topics}
+          );
+          console.log(this.state)
+        }
+    )
   }
 
   selectModule(moduleId) {
