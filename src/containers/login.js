@@ -3,8 +3,6 @@ import "./ProfilePage.css"
 import userService from "../services/UserService"
 import {Redirect} from 'react-router';
 
-var session = window.sessionStorage;
-
 export default class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
@@ -17,7 +15,6 @@ export default class ProfilePage extends React.Component {
   }
 
   componentDidMount() {
-
   }
 
   getProfile() {
@@ -43,12 +40,23 @@ export default class ProfilePage extends React.Component {
 
   signin() {
     this.userService.login({
-      username: this.state.username,
-      password: this.state.password
-    }).catch(
-        alert("Wrong username or password, please try again")
-    );
-    this._isLogin = true;
+      username: document.getElementById("username").value,
+      password: document.getElementById("password").value
+    }).then((e) => {
+      if (e.status == 200) {
+        this._isLogin = true;
+      } else {
+        this._isLogin = false;
+        alert("Wrong username or password, please try again");
+      }
+    }).then(() => {
+      this.render();
+      console.log(this._isLogin);
+      if (this._isLogin) {
+        window.location.replace("/profile")
+      }
+    });
+
   }
 
   render() {
