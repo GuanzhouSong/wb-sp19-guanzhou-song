@@ -105,26 +105,27 @@ export default class TopicTabs extends React.Component {
 
     return (
         <div>
-          <h3>Topic List for Lesson - {this.props.lessonId}</h3>
-          <div className="input-group">
-
-            <input onChange={this.titleChanged}
-                   value={this.state.topic.title}
-                   placeholder="title"
-                   className="form-control"/>
-            <span className="input-group-addon"><button
-                onClick={this.createTopic}
-                className="btn btn-primary btn-block">
-                            <i className="fa fa-plus"></i>
-                        </button></span>
-
-          </div>
           <br/>
           <br/>
-
-
           <ul className="nav nav-tabs">
             {this.renderListOfTopics()}
+            <li className="nav-item">
+              <a className="nav-link active" href="#">
+                <div className="input-group">
+                  <input onChange={this.titleChanged}
+                         value={this.state.topic.title}
+                         placeholder="title"
+                         className="form-control"/>
+                  <span className="input-group-addon">
+                  <button
+                      onClick={this.createTopic}
+                      className="btn btn-primary btn-block">
+                    <i className="fa fa-plus"></i>
+                  </button>
+                  </span>
+                </div>
+              </a>
+            </li>
           </ul>
 
         </div>

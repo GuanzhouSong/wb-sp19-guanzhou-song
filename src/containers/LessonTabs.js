@@ -97,26 +97,25 @@ export default class LessonTabs extends React.Component {
 
     return (
         <div>
-          <h3>Lesson List for Module - {this.props.moduleId}</h3>
-          <div className="input-group">
-
-            <input onChange={this.titleChanged}
-                   value={this.state.lesson.title}
-                   placeholder="title"
-                   className="form-control"/>
-            <span className="input-group-addon"><button
-                onClick={this.createLesson}
-                className="btn btn-primary btn-block">
-                            <i className="fa fa-plus"></i>
-                        </button></span>
-
-          </div>
           <br/>
           <br/>
-
-
           <ul className="nav nav-tabs">
             {this.renderListOfLessons()}
+            <li className="nav-item">
+              <a className="nav-link active" href="#">
+                <div className="input-group">
+                  <input onChange={this.titleChanged}
+                         value={this.state.lesson.title}
+                         placeholder="title"
+                         className="form-control"/>
+                  <span className="input-group-addon"><button
+                      onClick={this.createLesson}
+                      className="btn btn-primary btn-block">
+                            <i className="fa fa-plus"></i>
+                        </button></span>
+                </div>
+              </a>
+            </li>
           </ul>
 
         </div>

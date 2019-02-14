@@ -14,7 +14,7 @@ class ModuleService {
     ).then(response => response.json());
   }
 
-  deleteModule(courseId, moduleId) {
+  deleteModule(moduleId) {
     return fetch(MODULE_API_URL + moduleId, {
       method: 'delete'
     });

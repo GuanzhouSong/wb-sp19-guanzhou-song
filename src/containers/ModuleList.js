@@ -89,7 +89,6 @@ export default class ModuleList extends Component {
   render() {
     return (
         <div className='container'>
-          <h3>Module List for Course - {this.state.courseId}</h3>
           <table className="table">
 
 

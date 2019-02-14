@@ -20,7 +20,10 @@ export default class ModuleListItem
           <td>
             <Link to={`/course/${this.props.courseId}`}>
               <i onClick=
-                     {() => this.props.deleteModule(this.props.module.id)}
+                     {() => {
+                       console.log(this.props);
+                       this.props.deleteModule(this.props.module.id)
+                     }}
                  className="fa fa-trash"></i>
             </Link>
 

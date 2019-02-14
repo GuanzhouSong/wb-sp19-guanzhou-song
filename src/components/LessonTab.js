@@ -17,7 +17,8 @@ export default class LessonTab
           <span>
                 <i onClick=
                        {() => {
-                         if (window.confirm('Delete?')) {
+                         if (window.confirm(
+                             `Delete lesson ${this.props.lesson.title}?`)) {
                            console.log(this.props.lesson.id);
                            this.props.deleteLesson(
                                this.props.lesson.id)
