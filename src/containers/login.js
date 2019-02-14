@@ -31,11 +31,14 @@ export default class ProfilePage extends React.Component {
   handleChangeUsername = (e) => {
     var username = e.target.value;
     this.setState({username: username});
+    console.log(this.state.username)
+
   };
 
   handleChangePassword = (e) => {
     var password = e.target.value;
     this.setState({password: password});
+    console.log(this.state.password)
   };
 
   signin() {
