@@ -58,10 +58,15 @@ export default class CourseGrid extends React.Component {
                      placeholder="New Course Title"
                      onChange={this.handleChange}
               />
-              <div className="col-2">
+              <div className="col-1">
                 <a className="btn btn-danger" href="#"
                    onClick={this.createCourse}>
                   <i className="fa fa-plus"></i>
+                </a>
+              </div>
+              <div className="col-1">
+                <a className="btn btn-warning" href="/login">
+                  <i className="fa fa-user-circle"></i>
                 </a>
               </div>
             </form>
