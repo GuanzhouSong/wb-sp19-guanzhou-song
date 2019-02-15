@@ -9,7 +9,9 @@ export default class ProfilePage extends React.Component {
     this.userService = new userService();
     this.state = {
       user: []
-    }
+    };
+    this.logOut = this.logOut.bind(this);
+    this.updateProfile = this.updateProfile.bind(this);
   }
 
   componentDidMount() {
@@ -18,8 +20,16 @@ export default class ProfilePage extends React.Component {
 
   getProfile() {
     this.userService.getProfile().then(
-        user => {
-          this.setState({user: user})
+        e => {
+          if (e.status == 200) {
+            e.json().then(res => {
+              this.setState({
+                user: res
+              })
+            })
+          } else {
+            alert("get profile failed")
+          }
         }
     );
   }
@@ -40,19 +50,29 @@ export default class ProfilePage extends React.Component {
     console.log(user)
   };
 
+  updateProfile() {
+    this.userService
+    .updateProfile(this.state.user.id, this.state.user)
+    .then(e => {
+      if (e.status == 200) {
+        alert("update success!");
+        window.location.reload()
+      } else {
+        alert("update failed!");
+      }
+    })
+  }
+
+  logOut = () => {
+    this.userService.logOut();
+    alert("Log out successful");
+    window.location.replace("/")
+  };
+
   render() {
     return (<div className="container-fluid">
       <h1>Register</h1>
       <form>
-
-        <div className="form-group row">
-          <div className="col-sm-8">
-            <div className="form-control center" id="message"
-                 style={{'text-align': 'center'}}>
-              Profile Update Success
-            </div>
-          </div>
-        </div>
 
         <div>
           <div className="form-group row">
@@ -148,7 +168,7 @@ export default class ProfilePage extends React.Component {
             <div className="form-group row">
               <div className="col-sm-8">
                 <button className="btn btn-primary-1 col-sm-12"
-                        id="update" type="button">
+                        id="update" type="button" onClick={this.updateProfile}>
                   Update
                 </button>
               </div>
@@ -156,11 +176,11 @@ export default class ProfilePage extends React.Component {
           </a>
         </div>
 
-        <a href="/index.html">
+        <a href="#">
           <div className="form-group row">
             <div className="col-sm-8">
               <button className="btn btn-primary-2 col-sm-12"
-                      id="logout" type="button">
+                      id="logout" type="button" onClick={this.logOut}>
                 Log Out
               </button>
             </div>

@@ -23,7 +23,7 @@ class UserService {
       },
       credentials: 'include',
       method: 'POST'
-    }).then(response => response.json())
+    })
   }
 
   updateProfile(userId, user) {
@@ -34,7 +34,17 @@ class UserService {
       headers: {
         'content-type': 'application/json'
       }
-    }).then(response => response.json())
+    })
+  }
+
+  logOut() {
+    return fetch(API_URL + "logout", {
+      credentials: 'include',
+      headers: {
+        'content-type': 'application/json'
+      },
+      method: 'POST'
+    })
   }
 
 }
