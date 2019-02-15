@@ -6,6 +6,7 @@ var COURSE_API_URL = constant.COURSE_API_URL;
 class CourseService {
 
   findAllCourses() {
+    console.log(COURSE_API_URL);
     return fetch(COURSE_API_URL).then(response => response.json());
   }
 
