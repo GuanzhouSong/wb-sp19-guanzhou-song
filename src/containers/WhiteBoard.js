@@ -5,6 +5,7 @@ import CourseTable from '../components/CourseTable'
 import CourseEditor from "./CourseEditor";
 import ProfilePage from "./ProfilePage";
 import Login from "./login"
+import Register from "./register"
 
 class WhiteBoard extends Component {
   constructor() {
@@ -27,7 +28,8 @@ class WhiteBoard extends Component {
                      render={() => <ProfilePage/>}/>
               <Route path='/login'
                      render={() => <Login/>}/>
-
+              <Route path='/register'
+                     render={() => <Register/>}/>
             </div>
           </Router>
         </div>

@@ -47,6 +47,17 @@ class UserService {
     })
   }
 
+  register(user) {
+    return fetch(API_URL + "register", {
+      credentials: 'include',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(user),
+      method: 'POST'
+    })
+  }
+
 }
 
 export default UserService;

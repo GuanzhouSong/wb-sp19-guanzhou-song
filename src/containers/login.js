@@ -97,7 +97,7 @@ export default class ProfilePage extends React.Component {
           </div>
           <div className="col-sm-8">
             <a href="#" style={{float: 'left'}}>Forgot Password?</a>
-            <a href="/register/register.template.client.html"
+            <a href="/register"
                style={{float: 'right'}}>Sign
               up</a>
           </div>
