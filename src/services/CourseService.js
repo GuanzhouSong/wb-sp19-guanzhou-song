@@ -1,6 +1,7 @@
 import React from 'react';
+import * as constant from "constant"
 
-var COURSE_API_URL = "http://localhost:8080/api/course";
+var COURSE_API_URL = constant.COURSE_API_URL;
 
 class CourseService {
 

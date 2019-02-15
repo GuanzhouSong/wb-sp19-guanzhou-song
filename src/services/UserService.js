@@ -1,6 +1,7 @@
 import React from 'react';
+import * as constant from "constant"
 
-var API_URL = "http://localhost:8080/api/";
+var API_URL = constant.API_URL;
 
 class UserService {
 

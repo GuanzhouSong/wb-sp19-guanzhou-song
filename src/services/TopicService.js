@@ -1,9 +1,10 @@
 import React from 'react';
+import * as constant from "constant"
 
-var COURSE_API_URL = "http://localhost:8080/api/course/";
-var MODULE_API_URL = "http://localhost:8080/api/module/";
-var LESSON_API_URL = "http://localhost:8080/api/lesson/";
-var TOPIC_API_URL = "http://localhost:8080/api/topic/";
+var COURSE_API_URL = constant.COURSE_API_URL;
+var MODULE_API_URL = constant.MODULE_API_URL;
+var LESSON_API_URL = constant.LESSON_API_URL;
+var TOPIC_API_URL = constant.TOPIC_API_URL;
 
 
 class TopicService {
