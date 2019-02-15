@@ -1,5 +1,5 @@
 import React from 'react';
-import * as constant from "constant"
+import * as constant from "../constants/index"
 
 var COURSE_API_URL = constant.COURSE_API_URL;
 

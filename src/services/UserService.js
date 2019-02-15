@@ -1,5 +1,5 @@
 import React from 'react';
-import * as constant from "constant"
+import * as constant from "../constants/index"
 
 var API_URL = constant.API_URL;
 
@@ -17,7 +17,6 @@ class UserService {
   }
 
   getProfile() {
-    console.log(window.sessionStorage);
     return fetch(API_URL + "profile", {
       headers: {
         'Content-Type': 'application/json'
