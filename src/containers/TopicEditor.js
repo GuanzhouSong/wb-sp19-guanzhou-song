@@ -1,6 +1,10 @@
 import React from 'react'
-/*
-const store = createStore(widgetReducer)*/
+import {Provider} from 'react-redux'
+import {createStore} from 'redux'
+import widgetReducer from '../reducers/WidgetReducer'
+import App from './WidgetListContainer'
+
+const store = createStore(widgetReducer);
 export default class TopicEditor extends React.Component {
 
   constructor(props) {
@@ -33,6 +37,7 @@ export default class TopicEditor extends React.Component {
     (newProps.match.params.moduleId);
     this.selectCourse(newProps.match.params.courseId);
     this.selectLesson(newProps.match.params.lessonId);
+    this.selectTopic(newProps.match.params.topicId);
   }
 
   selectModule(moduleId) {
@@ -56,13 +61,13 @@ export default class TopicEditor extends React.Component {
         <div>
           <div className="row">
             <div className="col-8">
-              {/*<Provider store={store}>
+              <Provider store={store}>
                 <div className="container"><br></br>
                   <div>
                     <App topicId={this.props.match.params.topicId}/>
                   </div>
                 </div>
-              </Provider>*/}
+              </Provider>
             </div>
           </div>
         </div>

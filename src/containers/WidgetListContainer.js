@@ -1,23 +1,23 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import WidgetList from './WidgetList'
-import WidgetListService from "../services/WidgetListService";
+import * as actions from "../actions"
 
 const stateToPropertyMapper = state => ({
   widgets: state.widgets,
   preview: state.preview
 });
 
-var widgetService = new WidgetListService();
 const dispatchToPropertyMapper = dispatch => ({
   deleteWidget: widget =>
       dispatch({
         type: 'DELETE_WIDGET',
         widget: widget
       }),
-  addWidget: () =>
+  addWidget: (topicId) =>
       dispatch({
-        type: 'ADD_WIDGET'
+        type: 'ADD_WIDGET',
+        topicId: topicId
       }),
   updateWidget: widget =>
       dispatch({
@@ -30,22 +30,17 @@ const dispatchToPropertyMapper = dispatch => ({
             widget: widget
           }
       ),
-  findAllWidgetsForTopic: (courseId, moduleId, lessonId, topicId) =>
-      dispatch({
-        type: 'FIND_ALL_WIDGETS_FOR_TOPIC',
-        courseId: courseId,
-        moduleId: moduleId,
-        lessonId: lessonId,
-        topicId: topicId
+  findAllWidgetsForTopic: (topicId) =>
+      actions.findWidgetsByTopic(dispatch, topicId),
 
-      }),
   findAllWidgets: () =>
       dispatch({
         type: 'FIND_ALL_WIDGETS'
       }),
-  saveWidgets: () =>
+  saveWidgets: (topicId) =>
       dispatch({
-        type: 'SAVE_WIDGETS'
+        type: 'SAVE_WIDGETS',
+        topicId: topicId
       }),
   widgetMovingUp: widget =>
       dispatch({

@@ -50,8 +50,9 @@ export default class TopicTabs extends React.Component {
     this.setModuleId(this.props.moduleId);
     this.setCourseId(this.props.courseId);
     this.setLessonId(this.props.lessonId);
-
   }
+
+
 
   componentWillReceiveProps(newProps) {
     this.setModuleId(newProps.moduleId);
@@ -84,10 +85,10 @@ export default class TopicTabs extends React.Component {
 
   renderListOfTopics() {
     let topics = null;
-
     if (this.state) {
       topics = this.state.topics.map(
           (topic) => {
+            console.log(topic);
             return <TopicTab courseId={this.props.courseId}
                              moduleId={this.props.moduleId}
                              lessonId={this.props.lessonId}
@@ -101,7 +102,6 @@ export default class TopicTabs extends React.Component {
   }
 
   render() {
-    console.log(this.state);
 
     return (
         <div>

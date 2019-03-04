@@ -21,10 +21,11 @@ export default class WidgetListItem
                 </button>
                 <select class="custom-select d-inline w-50" id="HeadingRole"
                         onClick={this.onchange}>
-                  <option value="heading">Heading</option>
+                  <option selected value="heading">Heading</option>
                   <option value="list">List</option>
                   <option value="image">Image</option>
                   <option value="link">Link</option>
+                  <option value="paragraph">Paragraph</option>
                 </select>
                 <button class="btn btn-danger">
                   <i class="fa fa-trash-o"></i>
@@ -72,6 +73,7 @@ export default class WidgetListItem
                   <option selected value="list">List</option>
                   <option value="image">Image</option>
                   <option value="link">Link</option>
+                  <option value="paragraph">Paragraph</option>
                 </select>
                 <button class="btn btn-danger">
                   <i class="fa fa-trash-o"></i>
@@ -105,6 +107,7 @@ export default class WidgetListItem
             </div>
           </div>
 
+
           <div class="container widget" id="paragraphBox">
             <div class="row mb-3">
               <div class="col-7">
@@ -118,10 +121,11 @@ export default class WidgetListItem
                   <i class="fa fa-arrow-down "></i>
                 </button>
                 <select class="custom-select d-inline w-50" id="ParagraphROle">
-                  <option selected value="heading">Paragraph</option>
+                  <option value="heading">Heading</option>
                   <option value="list">List</option>
                   <option value="image">Image</option>
                   <option value="link">Link</option>
+                  <option selected value="paragraph">Paragraph</option>
                 </select>
                 <button class="btn btn-danger">
                   <i class="fa fa-trash-o"></i>
@@ -164,6 +168,7 @@ export default class WidgetListItem
                   <option value="list">List</option>
                   <option selected value="image">Image</option>
                   <option value="link">Link</option>
+                  <option value="paragraph">Paragraph</option>
                 </select>
                 <button class="btn btn-danger">
                   <i class="fa fa-trash-o"></i>
@@ -203,10 +208,11 @@ export default class WidgetListItem
                   <i class="fa fa-arrow-down "></i>
                 </button>
                 <select class="custom-select d-inline w-50" id="LinkRole">
-                  <option selected value="heading">Link</option>
+                  <option value="heading">Heading</option>
                   <option value="list">List</option>
                   <option value="image">Image</option>
-                  <option value="link">Heading</option>
+                  <option selected value="link">Link</option>
+                  <option value="paragraph">Paragraph</option>
                 </select>
                 <button class="btn btn-danger">
                   <i class="fa fa-trash-o"></i>
