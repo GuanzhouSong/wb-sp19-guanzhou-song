@@ -13,3 +13,30 @@ export const findWidgetsByTopic = (dispatch, topicId) => {
         widgets: widgets
       }))
 };
+
+export const createWidget = (dispatch, topicId, widgets) => {
+  let ws = new widgetService();
+  let newWidget = {
+    tid: widgets.length,
+    text: '',
+    wtype: 'HEADING',
+    size: 1,
+    name: 'New Widget',
+    listType: 'Unordered list',
+    width: 0,
+    height: 0,
+    title: '',
+    item: [],
+    ordered: true,
+    url: '',
+    urlName: '',
+    src: '',
+    widgetOrder: widgets.length,
+  };
+  ws.createWidget(topicId, newWidget)
+  .then(widget =>
+      dispatch({
+        type: "ADD_WIDGET",
+        widget: widget
+      }))
+};

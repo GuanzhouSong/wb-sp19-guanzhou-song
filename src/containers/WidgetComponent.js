@@ -20,20 +20,21 @@ class WidgetComponent extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
         <div className="container widget">
           <div className="row mb-3">
             <div className="col-7">
               {
-                this.props.widget.type == 'HEADING' && <h2>Heading Widget</h2>
+                this.props.widget.wtype == 'HEADING' && <h2>Heading Widget</h2>
                 ||
-                this.props.widget.type == 'IMAGE' && <h2>Image Widget</h2>
+                this.props.widget.wtype == 'IMAGE' && <h2>Image Widget</h2>
                 ||
-                this.props.widget.type == 'LINK' && <h2>Link Widget</h2>
+                this.props.widget.wtype == 'LINK' && <h2>Link Widget</h2>
                 ||
-                this.props.widget.type == 'LIST' && <h2>List Widget</h2>
+                this.props.widget.wtype == 'LIST' && <h2>List Widget</h2>
                 ||
-                this.props.widget.type == 'PARAGRAPH' && <h2>Paragraph
+                this.props.widget.wtype == 'PARAGRAPH' && <h2>Paragraph
                   Widget</h2>
               }
             </div>
@@ -60,16 +61,16 @@ class WidgetComponent extends Component {
                 </button>
               }
               <select onChange={(event) => {
-                this.props.widget.type = event.target.value;
+                this.props.widget.wtype = event.target.value;
                 this.props.updateWidget(this.props.widget)
               }} className="custom-select d-inline w-50"
-                      value={this.props.widget.type}
+                      value={this.props.widget.wtype}
                       id="HeadingRole">
                 <option selected value="HEADING">Heading</option>
                 <option value="LIST">List</option>
                 <option value="IMAGE">Image</option>
                 <option value="LINK">Link</option>
-
+                <option value="PARAGRAPH">Paragraph</option>
               </select>
               <button onClick={() => this.props.deleteWidget(this.props.widget)}
                       className="btn btn-danger">
@@ -78,27 +79,27 @@ class WidgetComponent extends Component {
             </div>
           </div>
           {
-            this.props.widget.type == 'HEADING' &&
+            this.props.widget.wtype == 'HEADING' &&
             <HeadingWidget
                 updateWidget={this.props.updateWidget}
                 widget={this.props.widget}
                 preview={this.props.preview}/>
-            || this.props.widget.type == 'IMAGE' &&
+            || this.props.widget.wtype == 'IMAGE' &&
             <ImageWidget
                 updateWidget={this.props.updateWidget}
                 widget={this.props.widget}
                 preview={this.props.preview}/>
-            || this.props.widget.type == 'LIST' &&
+            || this.props.widget.wtype == 'LIST' &&
             <ListWidget
                 updateWidget={this.props.updateWidget}
                 widget={this.props.widget}
                 preview={this.props.preview}/>
-            || this.props.widget.type == 'LINK' &&
+            || this.props.widget.wtype == 'LINK' &&
             <LinkWidget
                 updateWidget={this.props.updateWidget}
                 widget={this.props.widget}
                 preview={this.props.preview}/>
-            || this.props.widget.type == 'PARAGRAPH' &&
+            || this.props.widget.wtype == 'PARAGRAPH' &&
             <ParagraphWidget
                 updateWidget={this.props.updateWidget}
                 widget={this.props.widget}

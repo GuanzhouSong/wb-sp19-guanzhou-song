@@ -10,9 +10,12 @@ export const widgetReducer = (state = {widgets: [], preview: "hahaha"},
     case "DELETE_WIDGET":
       return {
         widgets: state.widgets.filter(widget => (
-            widget.tid !== action.widget.tid
-
-        )),
+            widget.widgetOrder !== action.widget.widgetOrder
+        )).forEach(widget => {
+          if (widget.widgetOrder > action.widget.widgetOrder) {
+            widget.widgetOrder--;
+          }
+        }),
         preview: state.preview
       };
 
@@ -20,23 +23,7 @@ export const widgetReducer = (state = {widgets: [], preview: "hahaha"},
       return {
         widgets: [
           ...state.widgets,
-          {
-            tid: state.widgets.length,
-            text: '',
-            type: 'HEADING',
-            size: 1,
-            name: '',
-            listType: 'Unordered list',
-            width: 0,
-            height: 0,
-            title: '',
-            item: [],
-            ordered: true,
-            url: '',
-            urlName: '',
-            src: '',
-            widgetOrder: state.widgets.length,
-          }
+          action.widget
         ],
         preview: state.preview
       };
@@ -60,7 +47,6 @@ export const widgetReducer = (state = {widgets: [], preview: "hahaha"},
       newState = Object.assign({}, state);
       newState.preview = false;
       newState.widgets = action.widgets;
-      console.log(newState);
       return newState;
 
     case 'SAVE_WIDGETS':
