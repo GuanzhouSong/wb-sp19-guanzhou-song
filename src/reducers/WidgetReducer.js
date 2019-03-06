@@ -11,11 +11,7 @@ export const widgetReducer = (state = {widgets: [], preview: "hahaha"},
       return {
         widgets: state.widgets.filter(widget => (
             widget.widgetOrder !== action.widget.widgetOrder
-        )).forEach(widget => {
-          if (widget.widgetOrder > action.widget.widgetOrder) {
-            widget.widgetOrder--;
-          }
-        }),
+        )).sort((a, b) => (a.widgetOrder - b.widgetOrder)),
         preview: state.preview
       };
 
@@ -101,7 +97,6 @@ export const widgetReducer = (state = {widgets: [], preview: "hahaha"},
 
         }
       });
-
       return state;
 
     case 'WIDGET_MOVE_UP':

@@ -32,8 +32,11 @@ class WidgetList extends React.Component {
               <div className="offset-9">
 
                 <button className="btn btn-success mr-2"
-                        onClick={() => this.props.saveWidgets(
-                            this.props.topicId)}>Save
+                        onClick={() => {
+                          this.props.saveWidgets(this.props.topicId);
+                          this.props.findAllWidgetsForTopic(this.props.topicId);
+                        }
+                        }>Save
                 </button>
                 <span className="mr-2">Preview</span>
 

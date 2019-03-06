@@ -7,7 +7,7 @@ const HeadingWidget = ({widget, updateWidget, preview}) =>
             widget.size = parseInt(event.target.value);
             updateWidget(widget)
           }}
-          className="form-control" value={widget.size}>
+          className="form-control" value={widget.size ? widget.size : 1}>
         <option value="1">Heading 1</option>
         <option value="2">Heading 2</option>
         <option value="3">Heading 3</option>
