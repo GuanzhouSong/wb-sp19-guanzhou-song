@@ -33,11 +33,12 @@ const HeadingWidget = ({widget, updateWidget, preview}) =>
       <div hidden={!preview}>
         <h3>Preview</h3>
         {
-          widget.size === 1 && <h1>{widget.title}</h1> ||
+
           widget.size === 2 && <h2>{widget.title}</h2> ||
           widget.size === 3 && <h3>{widget.title}</h3> ||
           widget.size === 4 && <h4>{widget.title}</h4> ||
-          widget.size === 5 && <h5>{widget.title}</h5>
+          widget.size === 5 && <h5>{widget.title}</h5> ||
+          <h1>{widget.title}</h1>
         }
       </div>
     </div>;

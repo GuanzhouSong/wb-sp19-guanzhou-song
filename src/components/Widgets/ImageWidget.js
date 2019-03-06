@@ -3,9 +3,9 @@ import React from 'react'
 const ImageWidget = ({widget, updateWidget, preview}) =>
     <div>
       <input
-          value={widget.link}
+          value={widget.src}
           onChange={event => {
-            widget.link = event.target.value;
+            widget.src = event.target.value;
             updateWidget(widget)
           }}
           placeholder="Image Link"
@@ -20,7 +20,7 @@ const ImageWidget = ({widget, updateWidget, preview}) =>
           className="form-control"/>
       <div hidden={!preview}>
         <h3>Preview</h3>
-        <img src={widget.link} width="500px"/>
+        <img src={widget.src} width="500px"/>
       </div>
     </div>;
 

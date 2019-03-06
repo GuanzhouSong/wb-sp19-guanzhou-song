@@ -40,3 +40,4 @@ export const createWidget = (dispatch, topicId, widgets) => {
         widget: widget
       }))
 };
+

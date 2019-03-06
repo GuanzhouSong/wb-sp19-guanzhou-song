@@ -40,7 +40,7 @@ export default class ModuleEditor
   render() {
     return (
         <div>
-          <div className="col-8">
+          <div className="col-12">
             <LessonTabs moduleId={this.props.match.params.moduleId}
                         courseId={this.props.match.params.courseId}/>
           </div>
