@@ -29,8 +29,8 @@ const ListWidget = ({widget, updateWidget, preview}) =>
         <h3>Preview</h3>
         <div
             className="list-group row justify-content-start col-12 widget-inner">
-          {widget.text.split('\n').map(text =>
-              <li>{text}</li>)}
+          {widget.text ? widget.text.split('\n').map(text =>
+              <li>{text}</li>) : null}
         </div>
       </div>
     </div>;

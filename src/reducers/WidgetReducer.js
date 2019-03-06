@@ -32,7 +32,7 @@ export const widgetReducer = (state = {widgets: [], preview: "hahaha"},
       // replace the old widget with the new widget
       return {
         widgets: state.widgets.map(widget =>
-            widget.tid === action.widget.tid ? action.widget : widget
+            widget.id === action.widget.id ? action.widget : widget
         ),
         preview: state.preview
       };
@@ -51,13 +51,57 @@ export const widgetReducer = (state = {widgets: [], preview: "hahaha"},
 
     case 'SAVE_WIDGETS':
       console.log(state);
-      fetch(constants.WIDGET_API_URL + "batch/" + action.topicId, {
-        method: 'put',
-        body: JSON.stringify(state.widgets),
-        headers: {
-          'content-type': 'application/json'
+      state.widgets.forEach(widget => {
+        switch (widget.wtype) {
+          case 'HEADING':
+            fetch(constants.WIDGET_HEADING_API_URL + widget.id, {
+              method: 'put',
+              body: JSON.stringify(widget),
+              headers: {
+                'content-type': 'application/json'
+              }
+            });
+            break;
+          case 'IMAGE':
+            fetch(constants.WIDGET_IMAGE_API_URL + widget.id, {
+              method: 'put',
+              body: JSON.stringify(widget),
+              headers: {
+                'content-type': 'application/json'
+              }
+            });
+            break;
+          case 'LINK':
+            fetch(constants.WIDGET_LINK_API_URL + widget.id, {
+              method: 'put',
+              body: JSON.stringify(widget),
+              headers: {
+                'content-type': 'application/json'
+              }
+            });
+            break;
+          case 'LIST':
+            fetch(constants.WIDGET_LIST_API_URL + widget.id, {
+              method: 'put',
+              body: JSON.stringify(widget),
+              headers: {
+                'content-type': 'application/json'
+              }
+            });
+            break;
+          case 'PARAGRAPH':
+            fetch(constants.WIDGET_PARAGRAPH_API_URL + widget.id, {
+              method: 'put',
+              body: JSON.stringify(widget),
+              headers: {
+                'content-type': 'application/json'
+              }
+            });
+            break;
+
         }
       });
+
       return state;
 
     case 'WIDGET_MOVE_UP':

@@ -18,19 +18,19 @@ export const createWidget = (dispatch, topicId, widgets) => {
   let ws = new widgetService();
   let newWidget = {
     tid: widgets.length,
-    text: '',
+    text: 'New Text',
     wtype: 'HEADING',
     size: 1,
     name: 'New Widget',
     listType: 'Unordered list',
     width: 0,
     height: 0,
-    title: '',
-    item: [],
+    title: 'New Title',
+    item: ['new Item'],
     ordered: true,
-    url: '',
-    urlName: '',
-    src: '',
+    url: 'url',
+    urlName: 'Url Name',
+    src: 'new src',
     widgetOrder: widgets.length,
   };
   ws.createWidget(topicId, newWidget)

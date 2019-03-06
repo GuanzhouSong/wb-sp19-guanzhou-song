@@ -65,7 +65,7 @@ class WidgetList extends React.Component {
             }
             <button
                 onClick={() => {
-                  this.props.addWidget(this.props.topicId, this.state.widgets)
+                  this.props.addWidget(this.props.topicId, this.props.widgets)
                 }}
                 className="btn btn-success">
               Add
