@@ -97,11 +97,9 @@ export default class LessonTabs extends React.Component {
     return (
         <div>
           <br/>
-          <br/>
-          <ul className="nav nav-tabs">
+          <ul className="nav nav-tabs" role="tablist">
             {this.renderListOfLessons()}
             <li className="nav-item">
-              <a className="nav-link active" href="#">
                 <div className="input-group">
                   <input onChange={this.titleChanged}
                          value={this.state.lesson.title}
@@ -113,7 +111,6 @@ export default class LessonTabs extends React.Component {
                             <i className="fa fa-plus"></i>
                         </button></span>
                 </div>
-              </a>
             </li>
           </ul>
 

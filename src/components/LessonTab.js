@@ -8,7 +8,7 @@ export default class LessonTab
   }
   render() {
     return (
-        <li className="nav-item"><a className="nav-link active" href="#">
+        <li className="nav-item"><a className="nav-link" href="#">
           <Link
               to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>
             {this.props.lesson.title}
