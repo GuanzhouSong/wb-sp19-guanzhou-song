@@ -11,7 +11,8 @@ export default class TopicTabs extends React.Component {
       courseId: '',
       lessonId: '',
       topic: {title: ''},
-      topics: []
+      topics: [],
+      selected: ''
     };
     this.createTopic = this.createTopic.bind(this);
     this.titleChanged = this.titleChanged.bind(this);
@@ -19,11 +20,16 @@ export default class TopicTabs extends React.Component {
     this.setModuleId = this.setModuleId.bind(this);
     this.setCourseId = this.setCourseId.bind(this);
     this.setLessonId = this.setLessonId.bind(this);
+    this.setSelected = this.setSelected.bind(this);
     this.topicService = new TopicService();
   }
 
   setTopics(topics) {
     this.setState({topics: topics})
+  }
+
+  setSelected(id) {
+    this.setState({selected: id})
   }
 
   findAllTopicsForLesson(lessonId) {
@@ -93,7 +99,9 @@ export default class TopicTabs extends React.Component {
                              moduleId={this.props.moduleId}
                              lessonId={this.props.lessonId}
                              topic={topic}
-                             key={topic.id} deleteTopic={this.deleteTopic}/>
+                             self={this.props.selected == topic.id}
+                             key={topic.id} deleteTopic={this.deleteTopic}
+                             setSelected={this.setSelected}/>
           });
     }
     return (
@@ -105,12 +113,11 @@ export default class TopicTabs extends React.Component {
 
     return (
         <div>
-          <br/>
-          <br/>
-          <ul className="nav nav-tabs">
+          <br>
+          </br>
+          <ul className="nav nav-tabs" role="tablist">
             {this.renderListOfTopics()}
             <li className="nav-item">
-              <a className="nav-link active" href="#">
                 <div className="input-group">
                   <input onChange={this.titleChanged}
                          value={this.state.topic.title}
@@ -124,7 +131,6 @@ export default class TopicTabs extends React.Component {
                   </button>
                   </span>
                 </div>
-              </a>
             </li>
           </ul>
 

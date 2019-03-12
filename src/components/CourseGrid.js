@@ -44,12 +44,12 @@ export default class CourseGrid extends React.Component {
       }
     })
   };
+
   render() {
     return (
         <div className="container-fluid ">
           <nav
               className="navbar navbar-expand navbar-dark bg-primary static-top">
-
             <a className="navbar-brand pb-0 pt-0 d-none d-sm-inline" href="#">
               <i className="fa fa-bars pr-3"></i> Course Manager
             </a>
@@ -76,9 +76,15 @@ export default class CourseGrid extends React.Component {
             <thead>
             <tr>
               <th></th>
-              <th>Recent Document</th>
               <th>
-                <div className="d-none d-sm-block ">Owned by me</div>
+                <div className="d-none d-sm-block float-right"></div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </th>
+              <th>
+                <div
+                    className="d-none d-sm-block float-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
               </th>
               <th>
               </th>
