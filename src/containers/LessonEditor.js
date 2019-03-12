@@ -42,7 +42,7 @@ export default class ModuleEditor
     return (
         <div>
 
-          <div className="col-8">
+          <div className="col-12">
             <TopicTabs moduleId={this.props.match.params.moduleId}
                        courseId={this.props.match.params.courseId}
                        lessonId={this.props.match.params.lessonId}/>

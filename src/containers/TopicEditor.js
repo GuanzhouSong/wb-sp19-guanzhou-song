@@ -60,7 +60,7 @@ export default class TopicEditor extends React.Component {
     return (
         <div>
           <div className="row">
-            <div className="col-8">
+            <div className="col-12">
               <Provider store={store}>
                 <div className="container"><br></br>
                   <div>

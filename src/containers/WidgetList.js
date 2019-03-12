@@ -19,7 +19,7 @@ class WidgetList extends React.Component {
 
   componentWillReceiveProps(newProps) {
     if (newProps.topicId !== this.props.topicId) {
-      this.props.findAllWidgetsForTopic(this.props.topicId);
+      this.props.findAllWidgetsForTopic(newProps.topicId);
     }
   }
 
@@ -34,7 +34,8 @@ class WidgetList extends React.Component {
                 <button className="btn btn-success mr-2"
                         onClick={() => {
                           this.props.saveWidgets(this.props.topicId);
-                          this.props.findAllWidgetsForTopic(this.props.topicId);
+                          window.location.reload();
+                          alert("Saved!");
                         }
                         }>Save
                 </button>

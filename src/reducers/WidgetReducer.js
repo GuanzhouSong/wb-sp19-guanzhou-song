@@ -8,10 +8,21 @@ export const widgetReducer = (state = {widgets: [], preview: "hahaha"},
   switch (action.type) {
 
     case "DELETE_WIDGET":
+      fetch(constants.WIDGET_API_URL + action.widget.id, {
+        method: 'delete',
+      });
+      var count = 0;
+      var newWidget = state.widgets.filter(widget => (
+          widget.id !== action.widget.id
+      )).sort(
+          (a, b) => (a.widgetOrder - b.widgetOrder)
+      );
+      newWidget.forEach(widget =>
+          widget.widgetOrder = count++
+      );
+      console.log(newWidget);
       return {
-        widgets: state.widgets.filter(widget => (
-            widget.widgetOrder !== action.widget.widgetOrder
-        )).sort((a, b) => (a.widgetOrder - b.widgetOrder)),
+        widgets: newWidget,
         preview: state.preview
       };
 
@@ -46,8 +57,8 @@ export const widgetReducer = (state = {widgets: [], preview: "hahaha"},
       return newState;
 
     case 'SAVE_WIDGETS':
-      console.log(state);
       state.widgets.forEach(widget => {
+        console.log(widget);
         switch (widget.wtype) {
           case 'HEADING':
             fetch(constants.WIDGET_HEADING_API_URL + widget.id, {

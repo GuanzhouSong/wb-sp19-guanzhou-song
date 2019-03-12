@@ -20,7 +20,6 @@ class WidgetComponent extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
         <div className="container widget">
           <div className="row mb-3">
