@@ -365,14 +365,7 @@
       <workItem from="1552395583773" duration="10789000" />
       <workItem from="1552420197116" duration="183000" />
       <workItem from="1552421096378" duration="2593000" />
-      <workItem from="1552508787007" duration="1145000" />
-    </task>
-    <task id="LOCAL-00008" summary="LessonTabs added">
-      <created>1548765809699</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1548765809699</updated>
+      <workItem from="1552508787007" duration="1209000" />
     </task>
     <task id="LOCAL-00009" summary="ModuleList &amp; listitem added">
       <created>1548765828268</created>
@@ -710,30 +703,36 @@
       <option name="project" value="LOCAL" />
       <updated>1552509925827</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="url">
+      <created>1552509963753</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1552509963753</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="237742000" />
+    <option name="totallyTimeSpent" value="237806000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17040952" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17040952" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Inspection Results" order="0" weight="0.32876712" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.32876712" />
-      <window_info anchor="bottom" id="Run" order="3" visible="true" weight="0.33144477" />
+      <window_info anchor="bottom" id="Run" order="3" weight="0.33144477" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32876712" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="9" visible="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3286119" />
       <window_info anchor="bottom" id="Messages" order="12" />

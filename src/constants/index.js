@@ -1,6 +1,6 @@
-/*var url = "https://polar-garden-29820.herokuapp.com/";*/
+var url = "https://polar-garden-29820.herokuapp.com/";
 
-var url = "http://localhost:8080/";
+// var url = "http://localhost:8080/";
 export const URL = url;
 
 export const COURSE_API_URL = url + "api/course/";
