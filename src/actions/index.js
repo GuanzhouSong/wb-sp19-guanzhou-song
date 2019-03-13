@@ -7,11 +7,21 @@ const WIDGET_LESSON_URL =
 export const findWidgetsByTopic = (dispatch, topicId) => {
   let ws = new widgetService();
   ws.findAllWidgetsForTopic(topicId)
-  .then(widgets =>
-      dispatch({
+  .then(widgets => {
+    console.log(widgets.length);
+    if (widgets.length > 0) {
+      return dispatch({
         type: "FIND_ALL_WIDGETS_FOR_TOPIC",
         widgets: widgets
-      }))
+      })
+    } else {
+      return dispatch({
+        type: "FIND_ALL_WIDGETS_FOR_TOPIC",
+        widgets: []
+      })
+    }
+  })
+
 };
 
 export const createWidget = (dispatch, topicId, widgets) => {
