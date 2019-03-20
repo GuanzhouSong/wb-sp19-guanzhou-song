@@ -90,8 +90,6 @@ export default class ModuleList extends Component {
     return (
         <div className='container'>
           <table className="table">
-
-
             <thead>
             <tr>
               <th><input onChange={this.titleChanged}
@@ -108,8 +106,6 @@ export default class ModuleList extends Component {
               </th>
             </tr>
             </thead>
-
-
             <tbody>
             {this.renderListOfModules()}
             </tbody>

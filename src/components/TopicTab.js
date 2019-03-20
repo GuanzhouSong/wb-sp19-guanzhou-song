@@ -15,7 +15,6 @@ export default class TopicTab
              href={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}/topic/${this.props.topic.id}`}
           >
             {this.props.topic.title}
-
           <span>
                 <i onClick=
                        {() => {
