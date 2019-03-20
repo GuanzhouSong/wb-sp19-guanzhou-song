@@ -8,13 +8,15 @@ const LinkWidget = ({widget, updateWidget, preview}) =>
             widget.url = event.target.value;
             updateWidget(widget)
           }}
+          placeholder="Link URL"
           className="form-control"/>
       <input
-          value={widget.text}
+          value={widget.urlName}
           onChange={event => {
-            widget.text = event.target.value;
+            widget.urlName = event.target.value;
             updateWidget(widget)
           }}
+          placeholder="Link Text"
           className="form-control"/>
       <input
           value={widget.name}
@@ -22,12 +24,13 @@ const LinkWidget = ({widget, updateWidget, preview}) =>
             widget.name = event.target.value;
             updateWidget(widget)
           }}
+          placeholder="Widget Name"
           className="form-control"/>
       <div hidden={!preview}>
         <h3>Preview</h3>
         {
           <a href={widget.url} target="_blank">
-            {widget.text}
+            {widget.urlName}
           </a>
         }
       </div>

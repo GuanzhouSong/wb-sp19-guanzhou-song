@@ -1,21 +1,18 @@
 import React from 'react'
+import TopicTab from '../components/TopicTab';
 import TopicService from "../services/TopicService";
-import TopicTab from "../components/TopicTab"
 
 export default class TopicTabs extends React.Component {
   constructor(props) {
     super(props);
-    this.topicService = new TopicService();
+    console.log(props);
     this.state = {
-      moduleId: this.props.moduleId,
-      courseId: this.props.courseId,
-      lessonId: this.props.lessonId,
-      topics: this.topicService.findAllTopics(this.props.courseId,
-          this.props.moduleId, this.props.lessonId),
-      topic: {
-        title: '',
-        id: (new Date()).getTime()
-      }
+      moduleId: '',
+      courseId: '',
+      lessonId: '',
+      topic: {title: ''},
+      topics: [],
+      selected: ''
     };
     this.createTopic = this.createTopic.bind(this);
     this.titleChanged = this.titleChanged.bind(this);
@@ -23,29 +20,36 @@ export default class TopicTabs extends React.Component {
     this.setModuleId = this.setModuleId.bind(this);
     this.setCourseId = this.setCourseId.bind(this);
     this.setLessonId = this.setLessonId.bind(this);
-
+    this.setSelected = this.setSelected.bind(this);
+    this.topicService = new TopicService();
   }
 
   setTopics(topics) {
     this.setState({topics: topics})
   }
 
+  setSelected(id) {
+    this.setState({selected: id})
+  }
+
   findAllTopicsForLesson(lessonId) {
-    var topics = this.topicService
-    .findAllTopics(this.props.courseId, this.props.moduleId, lessonId);
-    this.setTopics(topics);
+    this.topicService
+    .findAllTopics(lessonId)
+    .then((topics) => {
+      this.setTopics(topics)
+    });
   }
 
   setModuleId(moduleId) {
     this.setState({moduleId: moduleId});
   }
 
-  setLessonId(lessonId) {
-    this.setState({lessonId: lessonId});
-  }
-
   setCourseId(courseId) {
     this.setState({courseId: courseId});
+  }
+
+  setLessonId(lessonId) {
+    this.setState({lessonId: lessonId});
   }
 
   componentDidMount() {
@@ -54,8 +58,9 @@ export default class TopicTabs extends React.Component {
     this.setLessonId(this.props.lessonId);
   }
 
+
+
   componentWillReceiveProps(newProps) {
-    console.log(newProps);
     this.setModuleId(newProps.moduleId);
     this.setCourseId(newProps.courseId);
     this.setLessonId(newProps.lessonId);
@@ -64,53 +69,39 @@ export default class TopicTabs extends React.Component {
 
   createTopic() {
     this.topicService
-    .createTopic(this.state.courseId, this.state.moduleId, this.state.lessonId,
-        this.state.topic);
-    this.topicService
-    .findAllTopics(this.state.courseId, this.props.moduleId,
-        this.props.lessonId);
-    this.setState({
-      lesson: {
-        title: '',
-        id: (new Date()).getTime()
-      }
+    .createTopic(this.props.lessonId, this.state.topic)
+    .then(() => {
+      this.findAllTopicsForLesson(this.props.lessonId);
     });
+    this.setState({topic: {title: ''}});
   }
 
   titleChanged(event) {
-    this.setState(
-        {
-          topic: {
-            title: event.target.value,
-            id: (new Date()).getTime()
-          }
-        });
+    console.log(event.target.value);
+    this.setState({topic: {title: event.target.value}});
   }
 
-  deleteTopic(e) {
-    console.log('delete');
+  deleteTopic(topicId) {
     this.topicService
-    .deleteTopic(this.props.courseId, this.props.moduleId, this.props.lessonId,
-        e.target.getAttribute("id"));
-
-    this.topicService
-    .findAllTopics(this.state.courseId, this.props.moduleId,
-        this.props.lessonId);
+    .deleteTopic(topicId)
+    .then(() => {
+      this.findAllTopicsForLesson(this.props.lessonId);
+    });
   }
 
   renderListOfTopics() {
     let topics = null;
-
     if (this.state) {
       topics = this.state.topics.map(
           (topic) => {
+            console.log(topic);
             return <TopicTab courseId={this.props.courseId}
                              moduleId={this.props.moduleId}
                              lessonId={this.props.lessonId}
                              topic={topic}
-                             selectTopic={this.props.selectTopic}
-                             topicId={topic.id}
-                             deleteTopic={this.deleteTopic}/>
+                             self={this.props.selected == topic.id}
+                             key={topic.id} deleteTopic={this.deleteTopic}
+                             setSelected={this.setSelected}/>
           });
     }
     return (
@@ -119,26 +110,28 @@ export default class TopicTabs extends React.Component {
   }
 
   render() {
+
     return (
         <div>
-          <div className="input-group">
-
-            <input onChange={this.titleChanged}
-                   value={this.state.topic.title}
-                   placeholder="title"
-                   className="form-control"/>
-            <span className="input-group-addon"><button
-                onClick={this.createTopic}
-                className="btn btn-primary btn-block">
-                            <i className="fa fa-plus"></i>
-                        </button></span>
-
-          </div>
-          <br/>
-          <br/>
-
-          <ul className="nav nav-tabs">
+          <br>
+          </br>
+          <ul className="nav nav-tabs" role="tablist">
             {this.renderListOfTopics()}
+            <li className="nav-item">
+                <div className="input-group">
+                  <input onChange={this.titleChanged}
+                         value={this.state.topic.title}
+                         placeholder="title"
+                         className="form-control"/>
+                  <span className="input-group-addon">
+                  <button
+                      onClick={this.createTopic}
+                      className="btn btn-primary btn-block">
+                    <i className="fa fa-plus"></i>
+                  </button>
+                  </span>
+                </div>
+            </li>
           </ul>
 
         </div>

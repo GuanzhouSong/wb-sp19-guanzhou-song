@@ -5,15 +5,15 @@ import widgetReducer from '../reducers/WidgetReducer'
 import App from './WidgetListContainer'
 
 const store = createStore(widgetReducer);
-export default class TopicEditor extends React.Component {
+export default class TopicEditorForTab extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      moduleId: this.props.match.params.moduleId,
-      courseId: this.props.match.params.courseId,
-      lessonId: this.props.match.params.lessonId,
-      topicId: this.props.match.params.topicId,
+      moduleId: this.props.moduleId,
+      courseId: this.props.courseId,
+      lessonId: this.props.lessonId,
+      topicId: this.props.topicId,
     };
     this.selectModule = this.selectModule.bind(this);
     this.selectCourse = this.selectCourse.bind(this);
@@ -23,21 +23,21 @@ export default class TopicEditor extends React.Component {
 
   componentDidMount() {
     this.selectModule
-    (this.props.match.params.moduleId);
+    (this.props.moduleId);
     this.selectCourse
-    (this.props.match.params.courseId);
+    (this.props.courseId);
     this.selectLesson
-    (this.props.match.params.lessonId);
+    (this.props.lessonId);
     this.selectTopic
-    (this.props.match.params.topicId);
+    (this.props.topicId);
   }
 
   componentWillReceiveNewProps(newProps) {
     this.selectModule
-    (newProps.match.params.moduleId);
-    this.selectCourse(newProps.match.params.courseId);
-    this.selectLesson(newProps.match.params.lessonId);
-    this.selectTopic(newProps.match.params.topicId);
+    (newProps.moduleId);
+    this.selectCourse(newProps.courseId);
+    this.selectLesson(newProps.lessonId);
+    this.selectTopic(newProps.topicId);
   }
 
   selectModule(moduleId) {
@@ -64,7 +64,7 @@ export default class TopicEditor extends React.Component {
               <Provider store={store}>
                 <div className="container"><br></br>
                   <div>
-                    <App topicId={this.props.match.params.topicId}/>
+                    <App topicId={this.props.topicId}/>
                   </div>
                 </div>
               </Provider>

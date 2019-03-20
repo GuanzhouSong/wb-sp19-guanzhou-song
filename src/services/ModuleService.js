@@ -1,48 +1,44 @@
 import React from 'react';
-import CourseService from "./CourseService";
+import * as constant from "../constants/index"
 
-var courseService = new CourseService();
+var COURSE_API_URL = constant.COURSE_API_URL;
+var MODULE_API_URL = constant.MODULE_API_URL;
 
 class ModuleService {
-  findAllModules(courseId) {
-    let course = courseService.findCourseById(courseId);
-    return course.modules;
+  findAllModules(moduleId) {
+    return fetch(COURSE_API_URL + moduleId + "/module"
+    ).then(response => response.json());
   }
 
   findModuleById(courseId, moduleId) {
-    let course = courseService.findCourseById(courseId);
-    return course.modules.filter(m => m.id == moduleId)[0]
+    return fetch(MODULE_API_URL + moduleId
+    ).then(response => response.json());
   }
 
-  deleteModule(courseId, moduleId) {
-    let course = {...courseService.findCourseById(courseId)};
-    let newModules = course.modules.filter(m => m.id != moduleId);
-    course.modules = newModules;
-    courseService.updateCourse(courseId, course);
-    return course;
-  }
-
-  updateModule(courseId, module) {
-    let modules = this.findAllModules(courseId).map(m => {
-      if (m.id == module.id) {
-        return module;
-      } else {
-        return m;
-      }
+  deleteModule(moduleId) {
+    return fetch(MODULE_API_URL + moduleId, {
+      method: 'delete'
     });
-    let course = {...courseService.findCourseById(courseId)};
-    course.modules = modules;
-    courseService.updateCourse(courseId, course);
-    return module
+  }
+
+  updateModule(moduleId, module) {
+    return fetch(MODULE_API_URL + moduleId, {
+      method: 'PUT',
+      body: JSON.stringify(module),
+      headers: {
+        'content-type': 'application/json'
+      }
+    }).then(response => response.json())
   }
 
   createModule(courseId, module) {
-    let modules = this.findAllModules(courseId);
-    modules.push(module);
-    let course = {...courseService.findCourseById(courseId)};
-    course.modules = modules;
-    courseService.updateCourse(courseId, course);
-    return module
+    return fetch(COURSE_API_URL + courseId + "/module", {
+      body: JSON.stringify(module),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST'
+    }).then(response => response.json())
   }
 }
 

@@ -2,11 +2,48 @@ import React from 'react';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import CourseCard from '../components/CourseCard'
+import CourseService from "../services/CourseService";
 
 export default class CourseGrid extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
+    this.courseService = new CourseService();
+    this.state = {
+      courses: [],
+      course: {
+        title: "new Course"
+      }
+    }
   }
+
+  componentDidMount = () =>
+      this.findAllCourses();
+
+  findAllCourses = () => {
+    this.courseService.findAllCourses().then(
+        courses => this.setState(
+            {courses: courses})
+    )
+
+  };
+
+  deleteCourse = courseId =>
+      this.courseService.deleteCourse(courseId).then(() =>
+          this.findAllCourses()
+      );
+
+  createCourse = () =>
+      this.courseService
+      .createCourse(this.state.course).then(() =>
+          this.findAllCourses());
+
+  handleChange = e => {
+    this.setState({
+      course: {
+        title: e.target.value
+      }
+    })
+  };
 
   render() {
     return (
@@ -18,10 +55,18 @@ export default class CourseGrid extends React.Component {
             </a>
             <form className="form-inline w-100">
               <input className="form-control col-10" type="search"
-                     placeholder="New Course Title"/>
-              <div className="col-2">
-                <a className="btn btn-danger" href="#">
+                     placeholder="New Course Title"
+                     onChange={this.handleChange}
+              />
+              <div className="col-1">
+                <a className="btn btn-danger" href="#"
+                   onClick={this.createCourse}>
                   <i className="fa fa-plus"></i>
+                </a>
+              </div>
+              <div className="col-1">
+                <a className="btn btn-warning" href="/login">
+                  <i className="fa fa-user-circle"></i>
                 </a>
               </div>
             </form>
@@ -31,9 +76,15 @@ export default class CourseGrid extends React.Component {
             <thead>
             <tr>
               <th></th>
-              <th>Recent Document</th>
               <th>
-                <div className="d-none d-sm-block ">Owned by me</div>
+                <div className="d-none d-sm-block float-right"></div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </th>
+              <th>
+                <div
+                    className="d-none d-sm-block float-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
               </th>
               <th>
               </th>
@@ -48,8 +99,9 @@ export default class CourseGrid extends React.Component {
             </thead>
           </table>
           <div className="card-deck">
-            {this.props.courses.map((course, key) =>
-                <CourseCard course={course} key={key}/>)}
+            {this.state.courses.map((course, key) =>
+                <CourseCard course={course} key={key}
+                            deleteCourse={this.deleteCourse}/>)}
           </div>
         </div>
     )
