@@ -1,6 +1,6 @@
-// var url = "https://gszcoupon.herokuapp.com/";
+var url = "https://gszcoupon.herokuapp.com/";
 
-var url = "http://localhost:5000/";
+// var url = "http://localhost:5000/";
 export const URL = url;
 
 export const COURSE_API_URL = url + "api/cp/";

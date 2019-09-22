@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6d7a129-e1f6-4dec-acd7-5dbb31ffd406" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CourseCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CourseGrid.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseGrid.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/constants/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -164,7 +161,7 @@
       <workItem from="1569161495402" duration="357000" />
       <workItem from="1569161928700" duration="4241000" />
       <workItem from="1569166312312" duration="25000" />
-      <workItem from="1569166347570" duration="701000" />
+      <workItem from="1569166347570" duration="748000" />
     </task>
     <task id="LOCAL-00006" summary="course editor edited">
       <created>1548765781736</created>
