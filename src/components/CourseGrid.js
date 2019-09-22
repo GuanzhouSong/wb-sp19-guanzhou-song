@@ -14,7 +14,7 @@ export default class CourseGrid extends React.Component {
         id: 0,
         cpType: "N/A",
         inUse: false,
-        expire:""
+        description:""
       }
     }
   }
@@ -29,6 +29,12 @@ export default class CourseGrid extends React.Component {
     )
 
   };
+
+  useCoupon = (id)=>{
+    this.courseService.useCoupon(id);
+    this.findAllCourses();
+    window.location.reload();
+  }
 
 
 
@@ -60,18 +66,20 @@ export default class CourseGrid extends React.Component {
               <th>
               </th>
               <th>
-                <a className="no-text-decoration d-inline" href="/table">
-                  <i
-                      className="fa fa-reorder pr-4"></i>
-                </a> <a className="no-decorate d-inline" href="#"> <i
-                  className="fa fa-sort pr-4"></i></a>
+                {/*<a className="no-text-decoration d-inline" href="/table">*/}
+                {/*  <i*/}
+                {/*      className="fa fa-reorder pr-4"></i>*/}
+                {/*</a> <a className="no-decorate d-inline" href="#"> <i*/}
+                {/*  className="fa fa-sort pr-4"></i></a>*/}
               </th>
             </tr>
             </thead>
           </table>
-          <div className="card-deck">
-            {this.state.courses.map((course) =>
-                <CourseCard course={course}/>)}
+          <div className="card-deck">{this.state.courses.length==0?<div>没有券╮(￣▽￣)╭"</div>:
+              this.state.courses.map((course) =>
+                    <CourseCard course={course} useCoupon={this.useCoupon}/>)
+          }
+
           </div>
         </div>
     )
