@@ -11,7 +11,10 @@ export default class CourseGrid extends React.Component {
     this.state = {
       courses: [],
       course: {
-        title: "new Course"
+        id: 0,
+        cpType: "N/A",
+        inUse: false,
+        expire:""
       }
     }
   }
@@ -27,23 +30,7 @@ export default class CourseGrid extends React.Component {
 
   };
 
-  deleteCourse = courseId =>
-      this.courseService.deleteCourse(courseId).then(() =>
-          this.findAllCourses()
-      );
 
-  createCourse = () =>
-      this.courseService
-      .createCourse(this.state.course).then(() =>
-          this.findAllCourses());
-
-  handleChange = e => {
-    this.setState({
-      course: {
-        title: e.target.value
-      }
-    })
-  };
 
   render() {
     return (
@@ -51,25 +38,9 @@ export default class CourseGrid extends React.Component {
           <nav
               className="navbar navbar-expand navbar-dark bg-primary static-top">
             <a className="navbar-brand pb-0 pt-0 d-none d-sm-inline" href="#">
-              <i className="fa fa-bars pr-3"></i> Course Manager
+              <i className="fa fa-bars pr-3"></i> Guanzhou Coupon Management System
             </a>
-            <form className="form-inline w-100">
-              <input className="form-control col-10" type="search"
-                     placeholder="New Course Title"
-                     onChange={this.handleChange}
-              />
-              <div className="col-1">
-                <a className="btn btn-danger" href="#"
-                   onClick={this.createCourse}>
-                  <i className="fa fa-plus"></i>
-                </a>
-              </div>
-              <div className="col-1">
-                <a className="btn btn-warning" href="/login">
-                  <i className="fa fa-user-circle"></i>
-                </a>
-              </div>
-            </form>
+
           </nav>
 
           <table className="table">
@@ -99,9 +70,8 @@ export default class CourseGrid extends React.Component {
             </thead>
           </table>
           <div className="card-deck">
-            {this.state.courses.map((course, key) =>
-                <CourseCard course={course} key={key}
-                            deleteCourse={this.deleteCourse}/>)}
+            {this.state.courses.map((course) =>
+                <CourseCard course={course}/>)}
           </div>
         </div>
     )

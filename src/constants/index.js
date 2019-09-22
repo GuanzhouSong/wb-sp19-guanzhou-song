@@ -1,9 +1,9 @@
-var url = "https://polar-garden-29820.herokuapp.com/";
+var url = "https://gszcoupon.herokuapp.com/";
 
-// var url = "http://localhost:8080/";
+// var url = "http://localhost:5000/";
 export const URL = url;
 
-export const COURSE_API_URL = url + "api/course/";
+export const COURSE_API_URL = url + "api/cp/";
 
 export const MODULE_API_URL = url + "api/module/";
 
