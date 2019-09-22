@@ -31,8 +31,12 @@ export default class CourseGrid extends React.Component {
   };
 
   useCoupon = (id)=>{
-    this.courseService.useCoupon(id);
-    this.findAllCourses();
+    this.courseService.useCoupon(id).then(
+        res=>{
+          this.findAllCourses();
+        }
+
+    );
     window.location.reload();
   }
 

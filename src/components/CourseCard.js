@@ -41,12 +41,7 @@ const CourseCard = ({course, useCoupon}) => {
                         }
                     })()}</p>
                     <p className="card-text">{course.inUse ? '准备一下，马上就来' : ''}</p>
-                    <a className="btn btn-primary" onClick={() => {
-                        if (window.confirm(
-                            "确定使用Coupon嘛？No Backsies.")) {
-                            useCoupon(course.id);
-                        }
-                    }}>
+                    <a className="btn btn-primary" onClick={() => {useCoupon(course.id);}}>
                         {course.inUse ? 'In Progress' : 'Use'}
                     </a>
                 </div>
